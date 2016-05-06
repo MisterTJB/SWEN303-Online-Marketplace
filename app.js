@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var login = require('./routes/login');
+
+//Just for testing
+var product = require('./routes/product');
 
 var app = express();
 
@@ -24,6 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/login', login);
+app.use('/product', product);
+
+app.post('/login-post', function(req, res, next) {
+    console.log("Testing");
+    
+    console.log("Email " + req.body.password);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

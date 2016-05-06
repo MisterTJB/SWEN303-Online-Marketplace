@@ -1,0 +1,12 @@
+#navbar {
+	padding: 1% 1% 1% 0%;
+}
+
+#search-box {
+	width: 600px;
+}
+
+.search-link {
+	font-size: 180%;
+	font-weight: bold;
+}
