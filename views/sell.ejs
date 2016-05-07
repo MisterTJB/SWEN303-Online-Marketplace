@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sell an Item</title>
+    <% include ../views/templates/head %>
+    
+  </head>
+  <body>
+  
+  <% include ../views/templates/header %>
+
+<div class="container">
+<div class="well">
+  <!-- Header -->
+  <div class="page-header">
+     <h1 id="navbar" style="text-align:center;">Item Details</h1>
+  </div>
+<form class="form-horizontal">
+  <fieldset>
+
+    <!-- Product title -->
+    <div class="form-group">
+      <label id="form-labels" for="inputTitle" class="col-lg-2 control-label">Title</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="inputTitle" placeholder="Product title">
+      </div>
+    </div>
+
+    <!-- Short Description-->
+    <div class="form-group">
+      <label for="shortDesc" id="form-labels" class="col-lg-2 control-label">Short description</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="shortDesc" placeholder="Short description">
+      </div>
+    </div>
+
+    <!-- Full description -->
+    <div class="form-group">
+      <label for="fullDesc" id="form-labels" class="col-lg-2 control-label">Full descripton</label>
+      <div class="col-lg-9">
+        <textarea class="form-control" rows="3" id="fullDesc" placeholder="Please enter a description describing your product."></textarea>
+                    <div class="checkbox">
+          <label id="form-labels">
+            <input type="checkbox"> New
+          </label>
+        </div>
+      </div>
+    </div>
+
+<!-- Catagory -->
+    <div class="form-group">
+      <label for="select" id="form-labels" class="col-lg-2 control-label">Catagory</label>
+      <div class="col-lg-9">
+        <select class="form-control" id="select">
+          <option>Clothing</option>
+          <option>Furniture</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <br>
+      </div>
+    </div>
+
+<!-- Price -->
+    <div class="form-group">
+  <label for="Price" id="form-labels" class="col-lg-2 control-label">Price $</label>
+  <div class="col-lg-2">
+    <input type="text" placeholder="$0.00"class="form-control">
+  </div>
+</div>
+
+
+<!-- Buttons -->
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary">List Item</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+</div>
+
+  </body>
+</html>
