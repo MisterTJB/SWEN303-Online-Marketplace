@@ -6,9 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+
+// Regular routes
 var users = require('./routes/users');
 var register = require('./routes/register');
 var sell = require('./routes/sell');
+
+// Endpoints
+var login = require('./routes/login-post');
 
 //Just for testing
 var product = require('./routes/product');
@@ -32,12 +37,7 @@ app.use('/users', users);
 app.use('/register', register);
 app.use('/product', product);
 app.use('/sell', sell);
-
-app.post('/login-post', function(req, res, next) {
-    console.log("Testing");
-    
-    console.log("Email " + req.body.password);
-});
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
