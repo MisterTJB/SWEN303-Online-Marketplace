@@ -20,18 +20,20 @@
             </li>
 
           </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" id="menuBarLogin">
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login/Register <span class="glyphicon glyphicon-log-in"></span></a>
-              <div class="dropdown-menu">
-                <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/login-post">
-                  <input name="email" id="email" type="text" placeholder="Email">
-                  <input name="password" id="password" type="password" placeholder="Password"><br>
-                  <button type="button" onclick="login()" id="loginButton" class="btn">Login</button>
-                </form>
-                <a href="/register">Register</a>
-              </div>
+            
+          <ul class="nav navbar-nav navbar-right" id="cssmenu">
+            <li class="dropdown dropdown-large" id="menuBarLogin">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login/Register <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span></a>
+              <ul class="dropdown-menu dropdown-menu-large row">    
+			    <li class="col-md-12" id="login-col"> 
+                  <form class="form-horizontal" id="login-form" method="post" enctype="multipart/form-data" action="/login-post">
+                    <input name="email" id="email" type="text" placeholder="Email">
+                    <input name="password" id="password" type="password" placeholder="Password"><br>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="login()" id="loginButton">Login</button>
+                  </form>
+                  <a class="btn btn-success btn-sm" id="register-but" href="/register">Register</a>
+            </li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -58,7 +60,6 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="#">Brand</a> -->
                   </div>
 
                   <div class="collapse navbar-collapse" id="navbar">
