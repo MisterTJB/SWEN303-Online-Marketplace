@@ -1,87 +1,114 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sell an Item</title>
-    <% include ../views/templates/head %>
-    
-  </head>
-  <body>
-  
+
+<head>
+  <title>Sell an Item</title>
+  <% include ../views/templates/head %>
+
+</head>
+
+<body>
+
   <% include ../views/templates/header %>
+    <link rel='stylesheet' href='/stylesheets/sell.css' />
 
-<div class="container">
-<div class="well">
-  <!-- Header -->
-  <div class="page-header">
-     <h1 id="navbar" style="text-align:center;">Item Details</h1>
-  </div>
-<form class="form-horizontal">
-  <fieldset>
+    <div class="container">
+      <div class="well">
+        <!-- Header -->
+        <div class="page-header">
+          <h1 id="navbar" style="text-align:center;">Item Details</h1>
+        </div>
+        <form class="form-horizontal">
+          <fieldset>
 
-    <!-- Product title -->
-    <div class="form-group">
-      <label id="form-labels" for="inputTitle" class="col-lg-2 control-label">Title</label>
-      <div class="col-lg-9">
-        <input type="text" class="form-control" id="inputTitle" placeholder="Product title">
-      </div>
-    </div>
+            <!--Upload-->
+            <div class="form-group">
+              <label id="form-labels" for="inputTitle" class="col-lg-2 control-label">Upload Images</label>
+              <div class="col-lg-9">
+                <div class="input-group image-preview">
+                  <input type="text" class="form-control image-preview-filename" >
+                  <span class="input-group-btn">
+                    <!-- image-preview-clear button -->
+                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                     <span class="glyphicon glyphicon-remove"></span> Clear
+                  </button>
+                  <!-- image-preview-input -->
+                  <div class="btn btn-default image-preview-input">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <span class="image-preview-input-title">Browse</span>
+                    <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" />
+                    <!-- rename it -->
+                  </div>
+                  </span>
+                </div>
+              </div>
+            </div>
 
-    <!-- Short Description-->
-    <div class="form-group">
-      <label for="shortDesc" id="form-labels" class="col-lg-2 control-label">Short description</label>
-      <div class="col-lg-9">
-        <input type="text" class="form-control" id="shortDesc" placeholder="Short description">
-      </div>
-    </div>
+            <!-- Product title -->
+            <div class="form-group">
+              <label id="form-labels" for="inputTitle" class="col-lg-2 control-label">Title</label>
+              <div class="col-lg-9">
+                <input type="text" class="form-control" id="inputTitle" placeholder="Product title">
+              </div>
+            </div>
 
-    <!-- Full description -->
-    <div class="form-group">
-      <label for="fullDesc" id="form-labels" class="col-lg-2 control-label">Full descripton</label>
-      <div class="col-lg-9">
-        <textarea class="form-control" rows="3" id="fullDesc" placeholder="Please enter a description describing your product."></textarea>
-                    <div class="checkbox">
-          <label id="form-labels">
+            <!-- Short Description-->
+            <div class="form-group">
+              <label for="shortDesc" id="form-labels" class="col-lg-2 control-label">Short description</label>
+              <div class="col-lg-9">
+                <input type="text" class="form-control" id="shortDesc" placeholder="Short description">
+              </div>
+            </div>
+
+            <!-- Full description -->
+            <div class="form-group">
+              <label for="fullDesc" id="form-labels" class="col-lg-2 control-label">Full descripton</label>
+              <div class="col-lg-9">
+                <textarea class="form-control" rows="3" id="fullDesc" placeholder="Please enter a description describing your product."></textarea>
+                <div class="checkbox">
+                  <label id="form-labels">
             <input type="checkbox"> New
           </label>
-        </div>
-      </div>
-    </div>
+                </div>
+              </div>
+            </div>
 
-<!-- Catagory -->
-    <div class="form-group">
-      <label for="select" id="form-labels" class="col-lg-2 control-label">Catagory</label>
-      <div class="col-lg-9">
-        <select class="form-control" id="select">
+            <!-- Catagory -->
+            <div class="form-group">
+              <label for="select" id="form-labels" class="col-lg-2 control-label">Catagory</label>
+              <div class="col-lg-9">
+                <select class="form-control" id="select">
           <option>Clothing</option>
           <option>Furniture</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
         </select>
-        <br>
+                <br>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+              <label for="Price" id="form-labels" class="col-lg-2 control-label">Price $</label>
+              <div class="col-lg-2">
+                <input type="text" placeholder="$0.00" class="form-control">
+              </div>
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">List Item</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
       </div>
     </div>
 
-<!-- Price -->
-    <div class="form-group">
-  <label for="Price" id="form-labels" class="col-lg-2 control-label">Price $</label>
-  <div class="col-lg-2">
-    <input type="text" placeholder="$0.00"class="form-control">
-  </div>
-</div>
+</body>
 
-
-<!-- Buttons -->
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">List Item</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
-</div>
-</div>
-
-  </body>
 </html>
