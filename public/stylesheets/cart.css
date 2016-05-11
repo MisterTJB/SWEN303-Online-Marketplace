@@ -1,0 +1,5 @@
+.table > tbody > tr > td, 
+.table > tbody > tr > th {
+    border-top-color: #2b3e50;
+    padding-top: 20px;
+}
