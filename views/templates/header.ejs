@@ -22,6 +22,9 @@
           </ul>
             
           <ul class="nav navbar-nav navbar-right" id="cssmenu">
+            <li id="logoutLink">
+              <a class="btn btn-link" onclick="logout()">Logout</a>
+            </li>
             <li class="dropdown dropdown-large" id="menuBarLogin">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login/Register <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span></a>
               <ul class="dropdown-menu dropdown-menu-large row">    
@@ -32,6 +35,7 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="login()" id="loginButton">Login</button>
                   </form>
                   <a class="btn btn-success btn-sm" id="register-but" href="/register">Register</a>
+                  <a href="/reset-password">Forgot password?</a>
             </li>
               </ul>
             </li>
