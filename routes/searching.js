@@ -19,7 +19,7 @@ function searchDatabase(val,res){
         pg.connect(database, function(err, client, done) {
 
         // Prepare the SQL query using string interpolation to populate label
-        var QUERYSTRING = "SELECT * FROM Stock WHERE label='%LABEL%';".replace("%LABEL%", val);
+        var QUERYSTRING = "SELECT * FROM Stock WHERE label LIKE '%LABEL%';".replace("%LABEL%", "%"+val+"%");
 
         // Check whether the connection to the database was successful
         if(err){
