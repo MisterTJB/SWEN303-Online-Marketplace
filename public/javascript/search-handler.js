@@ -43,11 +43,12 @@ function showResults(rows){
 	  	}
 
 	  var div = document.createElement("div");
-	  div.innerHTML = '<div class="row row-result" id=resultDiv'+cur_id+'><h3><a href='+link+' id=result-header>'+ title+'</a></h3><h4 style="'+style+'">'+stock+'</h4><p><b>$'+price+'</b></p><p >'+description+'</p></div>';
+	  div.innerHTML = '<div class="row row-result" id=resultDiv'+cur_id+'><div class="col-lg-12"><h3><a href='+link+' id=result-header>'+ title+'</a></h3><h4 style="'+style+'">'+stock+'</h4><p><b>$'+price+'</b></p><p >'+description+'</p></div></div>';
 
 	  var tId = cur_id -1;
 
-	$( div ).insertAfter( $( "#resultDiv"+tId ) ); 
+	// $( div ).insertBefore( $( "#resultDiv"+tId ) ); 
+	$( div ).insertBefore( $( "#resultDiv0" ) ); 
 
 	 cur_id++;
 	}
