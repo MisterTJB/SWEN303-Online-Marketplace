@@ -31,7 +31,7 @@ function showResults(rows){
 		var quantity = rows[i].quantity;
 		var description = rows[i].description;
 
-	  	var link =  "/documentView?product="+rows[i].sid;//Unique identifier
+	  	var link =  "/product?prod="+rows[i].sid;//Unique identifier
 
 	  	var stock = "Out of Stock";
 	  	var style = "Color:red;"
