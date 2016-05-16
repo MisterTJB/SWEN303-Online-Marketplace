@@ -87,4 +87,61 @@
           </div>
         </div>
       </div>
+
+        <!-- Advanced Search -->
+        <div class="container-fluid">
+       <div class="row" class="advanced-search">
+        <div id="filter-panel" class="collapse filter-panel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            
+                            <select id="sel-catagory" class="form-control">
+                                <option value="2">Phones</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option selected="selected" value="Catagory">Catagory</option>
+                            </select>                                
+                        </div> <!-- form group [rows] -->
+                        
+
+                        <div class="form-group">
+                            
+                            <select id="sel-sortBy" class="form-control">
+                                <option>Sort by</option>
+                                <option>Price</option>
+                                <option>Title</option>
+                            </select>                                
+                        </div> <!-- form group [order by] --> 
+
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" id="advanced-search" for="pref-search">Min $:</label>
+                            <input type="text" class="form-control input-sm" id="min-price">
+                        </div><!-- form group [search] -->
+                        <div class="form-group">
+                            <label class="filter-col" id="advanced-search" style="margin-right:0;" for="pref-search">Max $:</label>
+                            <input type="text" class="form-control input-sm" id="max-price">
+                        </div><!-- form group [search] -->
+                        <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                                <label id="advanced-search"><input type="checkbox" id="chk-stock"> In Stock</label>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel" onclick="toggleAdvanced()">
+            <span class="glyphicon glyphicon-cog"></span> Advanced Search
+        </button>
+  </div>
 </div>
+
+</div>
+
+
+ 

@@ -1,11 +1,33 @@
-var numberOfResults = 0;
+var advanced = false;
+
+
+function toggleAdvanced(){
+	advanced = !advanced;
+}
+
 
 function search(){
      var value = document.getElementById('search-box').value;
 
      if(value == null)return; 
 
-   var parameters = { search: value};
+     // Advanced search variables
+    var cat = $('#sel-catagory :selected').text();
+    var sort = $('#sel-sortBy :selected').text();
+    var min =  $('#min-price').val();
+    var max =  $('#max-price').val();
+    var showInStock = $("#chk-stock").is(':checked');
+    var isExpanded = $("#filter-panel").attr("aria-expanded");
+
+   var parameters = { search: value,
+   					   catagory: cat,
+   					   sortBy: sort,
+   					   minPrice:min,
+   					   maxPrice:max,
+   					   inStockOnly:showInStock,
+   					   adv:advanced
+   					};
+
   $.get( '/searching', parameters, function(data) {
  
       if(data == null){
