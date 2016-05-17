@@ -19,7 +19,7 @@ function getProduct(prodID, res){
 
         // Prepare the SQL query using string interpolation to populate label
         var QUERYSTRING = "SELECT * FROM Stock WHERE sid="+prodID+";";
-
+        done();
         // Check whether the connection to the database was successful
         if(err){
             console.error('Could not connect to the database');
@@ -32,7 +32,7 @@ function getProduct(prodID, res){
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
         client.query(QUERYSTRING, function(error, result){
-
+            done();
             console.log(result);
             if(error) {
                 console.error('Failed to execute query');
@@ -48,7 +48,8 @@ function getProduct(prodID, res){
              	  res.render('product', { title: result.rows[0].label,
   					      desc: result.rows[0].description,
   					      price: result.rows[0].price,
-  					      stock: inStock
+  					      stock: inStock,
+                                        catagories: "<option value='temp'>temp</option>"// Temporary, need to have a common method to get the categories from the database
   					    });
             }
         })
