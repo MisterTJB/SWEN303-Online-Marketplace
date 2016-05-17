@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Register</title>
 <% include ../views/templates/head %>
 <link rel='stylesheet' href='/stylesheets/login.css' />
   </head>
@@ -38,22 +38,22 @@
   <div class="container" id="login-con">
     <!-- Register -->
     <div id="register">
-      <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/register-post">
+      <form class="form-horizontal" method="post" action="/register">
         <legend style="text-align:center">Register An Account</legend>
 
         <!-- Name Input Register -->
         <div class="form-group">
           <label for="inputName" class="col-lg-2 control-label" id="labels">Name</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputName" placeholder="Name">
+            <input type="text" name="name" class="form-control" id="inputName" placeholder="Name">
           </div>
         </div>
 
         <!-- Email Input Register -->
         <div class="form-group">
-          <label for="inputEmail" class="col-lg-2 control-label" id="labels">Email</label>
+          <label for="inputUsername" class="col-lg-2 control-label" id="labels">Username</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+            <input type="text" name="username" class="form-control" id="inputEmail" placeholder="Username">
           </div>
         </div>
 
@@ -61,7 +61,7 @@
         <div class="form-group">
           <label for="inputPassword" class="col-lg-2 control-label" id="labels">Password</label>
           <div class="col-lg-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
           </div>
         </div>
 
@@ -69,7 +69,7 @@
         <div class="form-group">
           <label for="inputPassword" class="col-lg-2 control-label" id="labels">Confirm</label>
           <div class="col-lg-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            <input type="password" class="form-control" id="inputPasswordVerify" placeholder="Verify Password">
           </div>
         </div>
 
