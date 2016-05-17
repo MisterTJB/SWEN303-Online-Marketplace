@@ -8,11 +8,6 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg').native;
 
-// Assumes that a database named SWEN303 exists with role:swen303 and password:SWEN303
-// at localhost:5432
-var database = "postgres://swen303:SWEN303@localhost:5432/SWEN303";
-
-
 /*
 * Endpoint (POST) for logging a user in.
 *
@@ -24,7 +19,7 @@ router.post('/', function(req, res, next) {
     console.log("Trying to log in");
 
 
-    pg.connect(database, function(err, client, done) {
+    pg.connect(global.databaseURI, function(err, client, done) {
         var USERNAME = req.body.email;
         var PASSWORD = req.body.password;
 

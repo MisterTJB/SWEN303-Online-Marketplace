@@ -2,9 +2,6 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg').native;
 
-
-var database = "postgres://vanhunick:dolphins@depot:5432/SWEN303vanhunick";
-
 router.get('/searching', function(req, res){
 
     // input value from search
@@ -71,7 +68,7 @@ return queryString +=";";
 function searchDatabase(queryString,res){
 
         // Connect to the database
-        pg.connect(database, function(err, client, done) {
+        pg.connect(global.databaseURI, function(err, client, done) {
 
         // Prepare the SQL query using string interpolation to populate label
         // var QUERYSTRING = "SELECT * FROM Stock WHERE label LIKE '%LABEL%';".replace("%LABEL%", "%"+val+"%");

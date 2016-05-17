@@ -2,9 +2,6 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg').native;
 
-
-var database = "postgres://vanhunick:dolphins@depot:5432/SWEN303vanhunick";
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -15,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 function getProduct(prodID, res){
 	        // Connect to the database
-        pg.connect(database, function(err, client, done) {
+        pg.connect(global.databaseURI, function(err, client, done) {
 
         // Prepare the SQL query using string interpolation to populate label
         var QUERYSTRING = "SELECT * FROM Stock WHERE sid="+prodID+";";
