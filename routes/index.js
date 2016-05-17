@@ -23,18 +23,19 @@ router.get('/', function(req, res, next) {
 
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
+         var categories = "";
         client.query(QUERYSTRING, function(error, result){
 		done();
             console.log(result);
             if(error) {
                 console.error('Failed to execute query');
-                console.error(error);
+                console.error(error)
                 return;
             }
              else {
              	  	console.log(result);
  			
- 			var categories = "";
+
 
  			var i = 0;
  			for(i = 0; i < result.rows.length; i++){
@@ -44,10 +45,12 @@ router.get('/', function(req, res, next) {
  			}
  			console.log(categories);
 
- 			res.render('index', { catagories: categories });
+
              	  
             }
-        })
+
+        });
+        res.render('index', { categories: categories });
     });
 });
 
