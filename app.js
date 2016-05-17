@@ -20,6 +20,7 @@ var product = require('./routes/product');
 
 // Endpoints
 var login = require('./routes/login-post');
+var usersEndpoint = require("./routes/users-endpoint");
 
 //Just for testing
 var product = require('./routes/product');
@@ -47,6 +48,7 @@ app.use('/sell', sell);
 app.use('/login', login);
 app.use('/cart', cart);
 app.use('/product', product);
+app.use('/users-endpoint', usersEndpoint);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
