@@ -4,14 +4,8 @@ var pg = require('pg').native;
 
 router.get('/searching', function(req, res){
 
-    // input value from search
-    var val = req.query.search;
-    console.log("Test");
-    console.log(req.query.adv);
-
     // Check if it should be an advanced search
     if(req.query.adv == 'true'){
-            console.log("Doing advanced");
             searchDatabase(createQueryAdvanced( 
                 req.query.search,
                 req.query.catagory,
@@ -22,25 +16,18 @@ router.get('/searching', function(req, res){
                 ),res);
     }
     else {
-        console.log("Not Doing advanced");
             searchDatabase(createQueryNormal(req.query.search),res);
     }
-
-    // response = searchDatabase(val,res);
-
 });
 
-function searchDataBase(query, res){
-
-}
 
 function createQueryNormal(search){
     return "SELECT * FROM Stock WHERE label LIKE '%"+ search+"%';";
 }
 
 function createQueryAdvanced(search, catagory, sort, min, max, stock ){
+    console.log(stock);
 var queryString = "SELECT * FROM Stock WHERE label LIKE '%"+ search + "%' ";
-
 
 // Check if not the default value
 if(catagory != "Catagory"){
@@ -50,9 +37,15 @@ if(catagory != "Catagory"){
 if(min != "" && max != ""){
   queryString += "AND price BETWEEN "+min+" AND "+max;      
 }
+else if(min !=""){// Max must be empty 
+    queryString += "AND price > "+min+" ";      
+}
+else if(max !=""){// Min must be empty so assume 0
+    queryString += "AND price BETWEEN 0 AND "+max;      
+}
 
 // Only find products in stock
-if(stock){
+if(stock == 'true'){
   queryString += " AND quantity > 0 ";        
 }
 
@@ -60,18 +53,14 @@ if(sort != "Sort by"){
     queryString += "ORDER BY "+sort;  
 }
 
-console.log(queryString);
-return queryString +=";";
 
+return queryString +=";";
 }
 
 function searchDatabase(queryString,res){
 
         // Connect to the database
         pg.connect(global.databaseURI, function(err, client, done) {
-
-        // Prepare the SQL query using string interpolation to populate label
-        // var QUERYSTRING = "SELECT * FROM Stock WHERE label LIKE '%LABEL%';".replace("%LABEL%", "%"+val+"%");
 
         // Check whether the connection to the database was successful
         if(err){
@@ -85,7 +74,7 @@ function searchDatabase(queryString,res){
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
         client.query(queryString, function(error, result){
-
+        done();
             console.log(result);
             if(error) {
                 console.error('Failed to execute query');
