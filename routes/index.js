@@ -2,13 +2,11 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg').native;
 
-var database = "postgres://vanhunick:dolphins@depot:5432/SWEN303vanhunick";
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 
-	 pg.connect(database, function(err, client, done) {
+	 pg.connect(global.databaseURI, function(err, client, done) {
 
         // Select all the distinct categories
         var QUERYSTRING = "SELECT distinct on (category) category  FROM Stock;";
