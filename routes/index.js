@@ -21,9 +21,8 @@ router.get('/', function(req, res, next) {
 
         console.log('Connected to database');
 
-        // Execute the query -- an empty result indicates that the username:password pair does
-        // not exist in the database
-         var categories = "";
+        // Populates the categories with <option> elements corresponding to the categories that exist in the database
+        var categories = "";
         client.query(QUERYSTRING, function(error, result){
 		done();
             console.log(result);
