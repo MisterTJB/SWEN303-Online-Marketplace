@@ -8,7 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
 // Database URI
+global.databaseURI =  "postgres://vanhunick:dolphins@depot:5432/SWEN303vanhunick";
 global.databaseURI = "postgres://swen303:SWEN303@localhost:5432/SWEN303";
+
 
 // Regular routes
 var users = require('./routes/users');
