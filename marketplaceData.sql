@@ -125,9 +125,9 @@ ALTER SEQUENCE transactions_tid_seq OWNED BY transactions.tid;
 
 CREATE TABLE users (
     uid integer NOT NULL,
-    username character varying(50),
+    username character varying(50) UNIQUE,
     realname character varying(100),
-    password character varying(50)
+    password character varying(50) NOT NULL
 );
 
 
@@ -1249,7 +1249,7 @@ COPY users (uid, username, realname, password) FROM stdin;
 -- Name: users_uid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('users_uid_seq', 11, true);
+SELECT pg_catalog.setval('users_uid_seq', 1000, true);
 
 
 --
