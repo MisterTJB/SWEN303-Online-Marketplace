@@ -46,3 +46,10 @@ a {
     text-align: center;
 }
 
+.category-link {
+    font-size: 150%;
+}
+
+#category-row {
+    text-align: center;
+}

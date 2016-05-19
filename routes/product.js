@@ -46,7 +46,7 @@ function getProduct(prodID, res){
   					      desc: result.rows[0].description,
   					      price: result.rows[0].price,
   					      stock: inStock,
-                                        catagories: "<option value='temp'>temp</option>"// Temporary, need to have a common method to get the categories from the database
+                                        categories: "<option value='temp'>temp</option>"// Temporary, need to have a common method to get the categories from the database
   					    });
             }
         })

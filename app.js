@@ -12,6 +12,10 @@ global.databaseURI =  "postgres://vanhunick:dolphins@depot:5432/SWEN303vanhunick
 global.databaseURI = "postgres://swen303:SWEN303@localhost:5432/SWEN303";
 
 
+
+
+
+
 // Regular routes
 var users = require('./routes/users');
 var register = require('./routes/register');
@@ -19,6 +23,7 @@ var sell = require('./routes/sell');
 var cart = require('./routes/cart');
 var searching = require('./routes/searching');
 var product = require('./routes/product');
+var account = require('./routes/account');
 
 // Endpoints
 var login = require('./routes/login-post');
@@ -51,6 +56,7 @@ app.use('/login', login);
 app.use('/cart', cart);
 app.use('/product', product);
 app.use('/users-endpoint', usersEndpoint);
+app.use('/account', account);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
