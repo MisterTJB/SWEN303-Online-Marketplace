@@ -6,6 +6,7 @@ router.get('/searching', function(req, res){
 
     // Check if it should be an advanced search
     if(req.query.adv == 'true'){
+        console.log("searching advanced");
             searchDatabase(createQueryAdvanced( 
                 req.query.search,
                 req.query.catagory,
@@ -16,6 +17,7 @@ router.get('/searching', function(req, res){
                 ),res);
     }
     else {
+            console.log("searching normal");
             searchDatabase(createQueryNormal(req.query.search),res);
     }
 });

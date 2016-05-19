@@ -75,3 +75,14 @@ function showResults(rows){
 	 cur_id++;
 	}
 }
+
+$(document).ready( function() {
+ $('#main-search').on('keyup keypress', function(e) {
+    var keyCode = e.keyCode || e.which;
+    if (keyCode === 13) { 
+      e.preventDefault();
+      search();
+      return false;
+    }
+});
+});
