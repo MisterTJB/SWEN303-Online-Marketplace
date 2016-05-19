@@ -3,10 +3,10 @@ var router = express.Router();
 var pg = require('pg').native;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/:productid', function(req, res, next) {
 
-  var prodID = req.query.prod;
-  var productResult = getProduct(prodID,res);
+  var prodID = req.params.productid;
+  res.render("product", {title: "Test", desc: "Description", price: 100, stock: 10, categories: []});
  
 });
 
@@ -46,7 +46,7 @@ function getProduct(prodID, res){
   					      desc: result.rows[0].description,
   					      price: result.rows[0].price,
   					      stock: inStock,
-                                        catagories: "<option value='temp'>temp</option>"// Temporary, need to have a common method to get the categories from the database
+                                        categories: "<option value='temp'>temp</option>"// Temporary, need to have a common method to get the categories from the database
   					    });
             }
         })
