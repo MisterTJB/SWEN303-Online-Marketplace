@@ -39,7 +39,7 @@ router.post("/", function(req, res, next){
         return;
       }
     });
-    res.render("index", {categories : ""});
+    res.redirect("/users/%USERNAME%".replace("%USERNAME%", req.body.username));
   });
 });
 
