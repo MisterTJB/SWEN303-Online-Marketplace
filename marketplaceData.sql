@@ -36,6 +36,7 @@ CREATE ROLE SWEN303 PASSWORD 'SWEN303' SUPERUSER CREATEDB CREATEROLE INHERIT LOG
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 
 --
@@ -136,6 +137,16 @@ CREATE TABLE users (
 );
 
 
+CREATE TABLE invite_codes (
+    code character varying(100) NOT NULL,
+    invited_by character varying(100),
+    used boolean
+);
+
+INSERT INTO invite_codes VALUES (uuid_generate_v4(), 'admin', false);
+INSERT INTO invite_codes VALUES (uuid_generate_v4(), 'admin', false);
+INSERT INTO invite_codes VALUES (uuid_generate_v4(), 'admin', false);
+
 --
 -- Name: users_uid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
@@ -146,6 +157,7 @@ CREATE SEQUENCE users_uid_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
 
 
 --

@@ -29,6 +29,7 @@ var account = require('./routes/account');
 var login = require('./routes/login-post');
 var usersEndpoint = require("./routes/users-endpoint");
 var categoriesEndpoint = require("./routes/categories-endpoint");
+var inviteCodesEndpoint = require("./routes/invite-code-endpoint");
 
 //Just for testing
 var product = require('./routes/product');
@@ -61,6 +62,7 @@ app.use('/product', product);
 app.use('/users-endpoint', usersEndpoint);
 app.use('/account', account);
 app.use('/categories', categoriesEndpoint);
+app.use('/invite-code-endpoint', inviteCodesEndpoint);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
