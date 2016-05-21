@@ -39,6 +39,18 @@ router.post("/", function(req, res, next){
         return;
       }
     });
+
+    client.query("UPDATE invite_codes SET used='true' WHERE code='%UUID%'".replace("%UUID%", req.body.inviteCode), function (error, result) {
+
+      console.log(result);
+      console.log(error);
+      if (error) {
+        console.error('Failed to execute query');
+        console.error(error);
+        return;
+      }
+    });
+
     res.redirect("/users/%USERNAME%".replace("%USERNAME%", req.body.username));
   });
 });

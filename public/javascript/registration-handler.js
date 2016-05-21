@@ -4,6 +4,7 @@
 
 var usernameValid = false;
 var passwordValid = false;
+var inviteValid = false;
 
 /**
  * Performs a check against the database to determine whether a username already exists
@@ -49,10 +50,39 @@ function checkPassword(){
 }
 
 /**
+ * Checks to ensure that an invitation code is valid
+ */
+function checkInviteCode(){
+    $("#codeHasBeenUsed").hide(300);
+    $.get("invite-code-endpoint/" + $("#inviteCode").val(), function(data){
+        if (data.validCode && !data.used){
+            $("#inviteCode").css('background-color', 'green');
+            inviteValid = true;
+        } else {
+            $("#inviteCode").css('background-color', 'red');
+            if (data.used){
+                $("#codeHasBeenUsed").show(400);
+            }
+            inviteValid = false;
+        }
+        toggleRegister();
+    });
+
+
+}
+
+/**
  * Handles enabling/disabling of the register button according to whether a) the username is available and b) the
  * passwords match
  */
 function toggleRegister(){
-    $("#register-button").prop('disabled', !(usernameValid && passwordValid));
+    $("#register-button").prop('disabled', !(usernameValid && passwordValid && inviteValid));
 
+}
+
+/**
+ * Sets the loggedInAs local storage variable so that the user is logged in
+ */
+function setLocalStorage(){
+    localStorage.setItem("loggedInAs", $("#inputUsername").val());
 }
