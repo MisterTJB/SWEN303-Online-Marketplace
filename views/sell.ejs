@@ -10,6 +10,8 @@
 <body>
 
   <% include ../views/templates/header %>
+  <script src="/javascript/tree-handler.js"></script>
+  <script src="/javascript/bootstrap-treeview.js"></script>
     
 
     <div class="container">
@@ -73,17 +75,11 @@
               </div>
             </div>
 
-            <!-- Catagory -->
+            <!-- Category -->
             <div class="form-group">
-              <label for="select" id="form-labels" class="col-lg-2 control-label">Catagory</label>
+              <label for="select" id="form-labels" class="col-lg-2 control-label">Category</label>
               <div class="col-lg-9">
-                <select class="form-control" id="select">
-          <option>Clothing</option>
-          <option>Furniture</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+                <div id="tree"></div>
                 <br>
               </div>
             </div>
@@ -100,7 +96,7 @@
             <!-- Buttons -->
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Cancel</button>
+                <a type="reset" class="btn btn-default" href="/">Cancel</a>
                 <button type="submit" class="btn btn-primary">List Item</button>
               </div>
             </div>

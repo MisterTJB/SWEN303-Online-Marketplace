@@ -7,9 +7,28 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg').native;
 
+// /**
+//  * Returns a set of the top level categories. Results are always expressed with underscores taking the
+//  * place of spaces.
+//  */
+// router.get('/', function(req, res, next) {
+//
+//     pg.connect(global.databaseURI, function(err, client, done){
+//         client.query("SELECT category FROM stock", function(error, result){
+//             var resultSet = new Set();
+//             for (categoryDictionary in result.rows){
+//                 var path = result.rows[categoryDictionary]['category'];
+//                 var top = path.split(".")[0];
+//                 resultSet.add(top);
+//             }
+//             res.send(resultSet);
+//         });
+//     });
+//
+// });
+
 /**
- * Returns a set of the top level categories. Results are always expressed with underscores taking the
- * place of spaces.
+ * Returns a set of all unique category paths
  */
 router.get('/', function(req, res, next) {
 
@@ -18,10 +37,9 @@ router.get('/', function(req, res, next) {
             var resultSet = new Set();
             for (categoryDictionary in result.rows){
                 var path = result.rows[categoryDictionary]['category'];
-                var top = path.split(".")[0];
-                resultSet.add(top);
+                resultSet.add(path);
             }
-            res.send(resultSet);
+            res.send(Array.from(resultSet).sort());
         });
     });
 
@@ -48,5 +66,6 @@ router.get('/:category', function(req, res, next) {
         });
     });
 });
+
 
 module.exports = router;
