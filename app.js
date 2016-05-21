@@ -14,8 +14,6 @@ global.databaseURI = "postgres://swen303:SWEN303@localhost:5432/SWEN303";
 
 
 
-
-
 // Regular routes
 var users = require('./routes/users');
 var register = require('./routes/register');
@@ -24,6 +22,7 @@ var cart = require('./routes/cart');
 var searching = require('./routes/searching');
 var product = require('./routes/product');
 var account = require('./routes/account');
+var payment = require('./routes/payment');
 
 // Endpoints
 var login = require('./routes/login-post');
@@ -63,6 +62,7 @@ app.use('/users-endpoint', usersEndpoint);
 app.use('/account', account);
 app.use('/categories', categoriesEndpoint);
 app.use('/invite-code-endpoint', inviteCodesEndpoint);
+app.use('/payment', payment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
