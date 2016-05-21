@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
                  var resultSet = new Set();
                  for (categoryDictionary in result.rows){
                      var path = result.rows[categoryDictionary]['category'];
+                     if(path == null)continue;
                      var top = path.split(".")[0];
                      resultSet.add(top);
                  }

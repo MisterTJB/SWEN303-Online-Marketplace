@@ -8,7 +8,7 @@ router.get('/searching', function(req, res){
     if(req.query.adv == 'true'){
         console.log("searching advanced");
             searchDatabase(createQueryAdvanced( 
-                req.query.search,
+                req.query.search.toLowerCase(),
                 req.query.catagory,
                 req.query.sortBy,
                 req.query.minPrice,
@@ -18,18 +18,18 @@ router.get('/searching', function(req, res){
     }
     else {
             console.log("searching normal");
-            searchDatabase(createQueryNormal(req.query.search),res);
+            searchDatabase(createQueryNormal(req.query.search.toLowerCase()),res);
     }
 });
 
 
 function createQueryNormal(search){
-    return "SELECT * FROM Stock WHERE label LIKE '%"+ search+"%';";
+    return "SELECT * FROM Stock WHERE lower(label) LIKE '%"+ search+"%';";
 }
 
 function createQueryAdvanced(search, catagory, sort, min, max, stock ){
     console.log(stock);
-var queryString = "SELECT * FROM Stock WHERE label LIKE '%"+ search + "%' ";
+var queryString = "SELECT * FROM Stock WHERE lower(label) LIKE '%"+ search + "%' ";
 
 // Check if not the default value
 if(catagory != "Catagory"){
