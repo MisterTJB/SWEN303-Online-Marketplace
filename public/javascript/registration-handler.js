@@ -54,7 +54,7 @@ function checkPassword(){
  */
 function checkInviteCode(){
     $("#codeHasBeenUsed").hide(300);
-    $.get("invite-code-endpoint/" + $("#inviteCode").val(), function(data){
+    $.post("invite-code-endpoint/" + $("#inviteCode").val(), function(data){
         if (data.validCode && !data.used){
             $("#inviteCode").css('background-color', 'green');
             inviteValid = true;

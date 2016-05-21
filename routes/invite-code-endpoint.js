@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
 /**
  * Checks to see if an invite code exists
  */
-router.get('/:uuid', function(req, res, next) {
+router.post('/:uuid', function(req, res, next) {
     pg.connect(global.databaseURI, function(err, client, done){
         client.query("SELECT * FROM invite_codes WHERE code='%UUID%'".replace("%UUID%", req.params.uuid), function(error, result){
             if (result.rowCount === 1){
