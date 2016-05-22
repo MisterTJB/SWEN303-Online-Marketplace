@@ -34,8 +34,8 @@ router.post('/', function(req, res, next) {
 
     console.log('Connected to database');
 
-    // Execute the query -- an empty result indicates that the username:password pair does
-    // not exist in the database
+
+    // Execute the query
     client.query(QUERY, function(error, result){
 
       console.log(result);
@@ -46,6 +46,31 @@ router.post('/', function(req, res, next) {
         return;
       }
       else {
+
+        // Get the max number of products allowed in the new queue
+        client.query("SELECT value FROM site_parameters WHERE parameter='PRODUCTS_IN_QUEUE'", function(err, result){
+          var max_queue = result.rows[0].value;
+          console.log("Max queue: " + max_queue);
+
+          client.query("SELECT count(*), min(sid) FROM stock WHERE status='pending'", function(err, result){
+            console.log(result.rows[0]);
+            var queue_length = result.rows[0]['count'];
+            var oldest_product = result.rows[0]['min'];
+
+            // If the new queue is too long, remove products from the queue
+            console.log("Queue length: " + queue_length);
+            console.log("Oldest product: " + oldest_product);
+            if (queue_length > max_queue){
+              client.query("UPDATE stock SET status='unsuccessful' WHERE sid='%SID%'".replace("%SID%", oldest_product), function(err, result){
+                console.log("Removed " + oldest_product);
+              });
+            }
+
+          });
+
+
+        });
+
         res.redirect("/product/" + result.rows[0].sid);
       }
     })
