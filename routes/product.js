@@ -48,7 +48,13 @@ router.post('/:productid', function(req, res, next) {
             return;
         }
 
-        var QUERY = "UPDATE stock SET votes=votes%VOTE_OPERATOR%, voters=array_append(voters, '%USERID%') WHERE sid=%STOCKID%;"
+        var votes_required;
+        client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
+            console.log(result);
+            votes_required = result.rows[0].value;
+        });
+
+        var QUERY = "UPDATE stock SET votes=votes%VOTE_OPERATOR%, voters=array_append(voters, '%USERID%') WHERE sid=%STOCKID% RETURNING votes;"
         QUERY = QUERY.replace("%USERID%", user);
         QUERY = QUERY.replace("%STOCKID%", productID);
         if (voteup){
@@ -57,10 +63,19 @@ router.post('/:productid', function(req, res, next) {
             QUERY = QUERY.replace("%VOTE_OPERATOR%", "-1");
         }
 
+        var votes_received;
         client.query(QUERY, function(err, result){
-            console.log(QUERY);
-            res.send(result);
+            console.log(result);
+            votes_received = result.rows[0].votes;
         });
+
+        if (votes_required === votes_received){
+            QUERY = "UPDATE stock SET status='listed' WHERE sid=%STOCKID%;".replace("%STOCKID%", productID);
+            client.query(QUERY, function(err, result){
+                console.log(QUERY);
+            });
+        }
+        res.send();
 
     });
 });

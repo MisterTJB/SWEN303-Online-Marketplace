@@ -78,6 +78,8 @@ CREATE TABLE stock (
     voters text[]
 );
 
+CREATE TRIGGER update_listing_status AFTER UPDATE OF votes WHEN NEW.votes >= (SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED')
+
 CREATE TABLE site_parameters (
     parameter text,
     value integer
