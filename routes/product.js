@@ -14,7 +14,6 @@ router.get('/:productid', function(req, res, next) {
 
         var votes_required;
         client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
-            console.log(result);
             votes_required = result.rows[0].value;
         });
 
