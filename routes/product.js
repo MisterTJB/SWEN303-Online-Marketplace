@@ -38,8 +38,12 @@ router.get('/:productid', function(req, res, next) {
 });
 
 function mean(list){
-    var sum = list.reduce(function(a, b){return a+b;});
-    return sum/list.length;
+    if (list.length > 0) {
+        var sum = list.reduce(function (a, b) {
+            return a + b;
+        });
+        return sum / list.length;
+    }
 }
 
 router.post('/:productid', function(req, res, next) {

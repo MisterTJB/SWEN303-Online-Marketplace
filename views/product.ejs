@@ -58,7 +58,7 @@
                         <% if (votes === votesRequired) {%>
                         <h4>Average valuation $<%= meanValuation %> </h4>
                         <p>Valued by <%= valuersCount %> members</p>
-                        <input placeholder="$0.00" id="valuationInput" \>
+                        <input placeholder="$0.00" id="valuationInput" \><br><br>
                         <a class="btn btn-info" id="valuationButton">Submit my valuation</a>
                         <hr>
 
@@ -67,7 +67,8 @@
 
 
                         <% if (votes === votesRequired) {%>
-                            <a href="#" class="btn btn-primary" id="buttons">Add to Cart</a>
+                            <a class="btn btn-primary" id="addToCart" onclick="addToCart()">Add to Cart</a>
+                            <a class="btn btn-primary" id="removeFromCart" onclick="removeFromCart()">Remove From Cart</a>
                         <%} else {%>
                             <h3 style="color:#32CD32"><%= votes %> / <%= votesRequired %></h3>
                             <button class="btn btn-success glyphicon glyphicon-arrow-up" id="upButton"></button>
