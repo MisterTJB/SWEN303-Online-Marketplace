@@ -29,12 +29,11 @@ $(document).ready(function(){
     console.log("Getting categories");
 
     $.get("/categories", function(data){
-       console.log(data);
         $('#tree').treeview({
             data: ltreeToJSON(data),
             levels: 0,
             onNodeSelected: function(event, node) {
-                selectedPath = selectedCategoryToLTreePath(node)}
+                $("#category").attr("value", selectedCategoryToLTreePath(node))}
     });
     });
 
