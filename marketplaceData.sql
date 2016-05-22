@@ -73,8 +73,20 @@ CREATE TABLE stock (
     price numeric(10,4),
     quantity integer,
     category ltree,
-    status listing_status
+    status listing_status,
+    votes integer,
+    voters text[]
 );
+
+CREATE TABLE site_parameters (
+    parameter text,
+    value integer
+);
+
+INSERT INTO site_parameters VALUES ('PRODUCTS_IN_QUEUE', 10);
+INSERT INTO site_parameters VALUES ('VOTES_REQUIRED', 10);
+INSERT INTO site_parameters VALUES ('COMPLAINTS_REQUIRED', 5);
+INSERT INTO site_parameters VALUES ('VALUATIONS_REQUIRED', 5);
 
 
 --
@@ -194,24 +206,24 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 -- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'unsuccessful');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (1,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (2,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'unsuccessful');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (3,	'Snakes and Ladders','Description',	1.0000,	1,   'Games.Board_Games.Childrens', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (3,	'Monopoly',	'Description', 3.00,	1,   'Games.Board_Games.Evil', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (4,	'Holy Grail',	'Description',0.99,	1,   'Artefacts.Religious', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (5,	'Meaning of Life',	'Description',42.00,	20,  'Truths.Existential', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (5,	'Cactus',	'Description',9.99,	3,   'Plants.Succulent.Evil.Prickly', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (5,	'Iris',	'Description',9.99,	15,  'Plants.Perennial', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (6,	'Knives',	'Description',15.50,	4,   'Homeware.Kitchen.Preparation.Sharp', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (6,	'Sword',	'Description',49.97,	8,  'Weaponry.Sharp', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (7,	'Kryptonite',	'Description',0.50,	100, 'Weaponry.Superhero_Specific.Superman', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (7,	'S Clothing Patch',	'Description',5.99,	1000,    'Clothes.Patches', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (8,	'Table',	'Description',10.00,	1,   'Homeware.Office.Tables', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (9,	'Small Chair',	'Description',5.00,	1,   'Homeware.Office.Chairs', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (10,'Coffee', 'Description',4.99,	10,  'Drugs.Stimulants.Caffeine', 'listed');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (10,'Muffin', 'Description',3.50,	10,  'Food.Baking', 'listed');
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'pending', 3, ARRAY['admin', 'MEME', 'test']);
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (1,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (2,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'unsuccessful');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (3,	'Snakes and Ladders','Description',	1.0000,	1,   'Games.Board_Games.Childrens', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (3,	'Monopoly',	'Description', 3.00,	1,   'Games.Board_Games.Evil', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (4,	'Holy Grail',	'Description',0.99,	1,   'Artefacts.Religious', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Meaning of Life',	'Description',42.00,	20,  'Truths.Existential', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Cactus',	'Description',9.99,	3,   'Plants.Succulent.Evil.Prickly', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Iris',	'Description',9.99,	15,  'Plants.Perennial', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (6,	'Knives',	'Description',15.50,	4,   'Homeware.Kitchen.Preparation.Sharp', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (6,	'Sword',	'Description',49.97,	8,  'Weaponry.Sharp', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (7,	'Kryptonite',	'Description',0.50,	100, 'Weaponry.Superhero_Specific.Superman', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (7,	'S Clothing Patch',	'Description',5.99,	1000,    'Clothes.Patches', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (8,	'Table',	'Description',10.00,	1,   'Homeware.Office.Tables', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (9,	'Small Chair',	'Description',5.00,	1,   'Homeware.Office.Chairs', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (10,'Coffee', 'Description',4.99,	10,  'Drugs.Stimulants.Caffeine', 'listed');
+--INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (10,'Muffin', 'Description',3.50,	10,  'Food.Baking', 'listed');
 --INSERT INTO stock VALUES (19, 3, 'Primis', 340.59, 46,'Category_B.Subcategory_A.Subsubcategory_C');
 --INSERT INTO stock VALUES (20, 10, 'Tempor Turpis', 125.25, 17,'Category_B.Subcategory_A.Subsubcategory_D');
 --INSERT INTO stock VALUES (21, 8, 'Odio', 739.34, 3,'Category_B.Subcategory_B.Subsubcategory_A');

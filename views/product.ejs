@@ -4,7 +4,8 @@
 <head>
     <title>Home</title>
     <% include ../views/templates/head %>
-        <link rel='stylesheet' href='/stylesheets/product.css' />
+    <link rel='stylesheet' href='/stylesheets/product.css' />
+    <script src="/javascript/product-handler.js"></script>
 </head>
 
 <body>
@@ -51,25 +52,38 @@
                 <div class="col-md-6">
                     <div class="well">
                         <h1><%= title %></h1>
-                        <p class="lead"><%= desc %></p>
+                        <p>Listed by <a id="listedBy"><%= listed_by%></a></p>
                         <hr>
                        
-                        <h3 style="">Price $ <%= price %></h3>
-                        <h3 style="color:#32CD32"><%= stock %></h3>
+                        <h3 style="">Price $<%= price %></h3>
 
-                        <a href="#" class="btn btn-primary" id="buttons">Add to Cart</a>
-                        <a href="#" class="btn btn-success" id="buttons">Buy</a>
+
+                        <% if (votes === votesRequired) {%>
+                            <a href="#" class="btn btn-primary" id="buttons">Add to Cart</a>
+                        <%} else {%>
+                            <h3 style="color:#32CD32"><%= votes %> / <%= votesRequired %></h3>
+                            <button class="btn btn-success glyphicon glyphicon-arrow-up" id="upButton"></button>
+                            <button class="btn btn-danger glyphicon glyphicon-arrow-down" id="downButton"></button>
+                            <h3>Voters</h3>
+                            <ul id="voters">
+                            <% for (voter in voters){ %>
+                                <li><%= voters[voter] %></li>
+                            <% } %>
+                            </ul>
+
+
+                        <%}%>
                     </div>
                 </div>
             </div>
 
             <div class="row test">
                 <div class="page-header" style="text-align:center;">
-                    <h1 id="navbar">Long Description</h1>
+                    <h1 id="navbar">Description</h1>
                 </div>
                 <div class="well">
                     <p>
-                        This product is very good
+                    <%= desc %>
                     </p>
                 </div>
             </div>
