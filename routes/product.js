@@ -28,11 +28,19 @@ router.get('/:productid', function(req, res, next) {
                 votesRequired: votes_required,
                 price: product.price,
                 stock: product.quantity,
+                meanValuation: mean(product.valuations),
+                valuersCount: product.valuers.length,
+                valuersList: product.valuers,
                 categories: []});
         });
 
     });
 });
+
+function mean(list){
+    var sum = list.reduce(function(a, b){return a+b;});
+    return sum/list.length;
+}
 
 router.post('/:productid', function(req, res, next) {
 

@@ -54,8 +54,16 @@
                         <h1><%= title %></h1>
                         <p>Listed by <a id="listedBy"><%= listed_by%></a></p>
                         <hr>
-                       
-                        <h3 style="">Price $<%= price %></h3>
+
+                        <% if (votes === votesRequired) {%>
+                        <h4>Average valuation $<%= meanValuation %> </h4>
+                        <p>Valued by <%= valuersCount %> members</p>
+                        <input placeholder="$0.00" id="valuationInput" \>
+                        <a class="btn btn-info" id="valuationButton">Submit my valuation</a>
+                        <hr>
+
+                        <%} %>
+                        <h3 style="">Asking Price $<%= price %></h3>
 
 
                         <% if (votes === votesRequired) {%>

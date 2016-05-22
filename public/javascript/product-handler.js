@@ -21,6 +21,14 @@ $(document).ready(function(){
         });
     });
 
+    $("#valuationButton").click(function(){
+       var value = $("#valuationInput").val();
+        var productID = window.location.pathname.split("/")[window.location.pathname.split("/").length - 1];
+        $.post("/valuation/" + productID, {valuation: value, user: localStorage.getItem("loggedInAs")}, function(data){
+            window.location.reload(true);
+        });
+    });
+
     if($("#voters > li:contains('%')".replace("%", localStorage.getItem('loggedInAs'))).length != 0 || $("#listedBy").text() === localStorage.getItem('loggedInAs')){
         $("#upButton").prop('disabled', true);
         $("#downButton").prop('disabled', true);

@@ -75,7 +75,10 @@ CREATE TABLE stock (
     category ltree,
     status listing_status,
     votes integer,
-    voters text[]
+    voters text[],
+    selling_at_list boolean,
+    valuations numeric(10,4)[],
+    valuers text[]
 );
 
 CREATE TABLE site_parameters (
@@ -206,7 +209,7 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 -- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'pending', 3, ARRAY['admin', 'MEME', 'test']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'pending', 3, ARRAY['admin', 'MEME', 'test'], true, ARRAY[]::numeric(10,4)[], ARRAY[]::text[]);
 --INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (1,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful');
 --INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (2,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'unsuccessful');
 --INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'listed');
