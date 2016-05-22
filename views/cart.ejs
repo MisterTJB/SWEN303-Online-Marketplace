@@ -4,7 +4,7 @@
     <title>Home</title>
     <% include ../views/templates/head %>
     <link rel='stylesheet' href='/stylesheets/cart.css' />
-    
+    <script src="/javascript/cart-handler.js"></script>
   </head>
   <body>
   
@@ -13,89 +13,30 @@
   <div class="container">
     <div class="well">
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <div class="col-sm-12 col-md-10 col-md-offset-1" id="cartDiv">
             <table class="table table-hover" id="cart-table">
                 <thead>
                     <tr>
                         <th><h4>Product</h4></th>
-                        <th><h4>Quantity</h4></th>
                         <th class="text-center"><h4>Price</h4></th>
-                        <th class="text-center"><h4>Total</h4></th>
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
+
+
                     <tr>
-                        <td class="col-sm-8 col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object"  src="http://placehold.it/72x72" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                
-                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
+                        <td>   </td>
+                        <td><h3>Total To Pay</h3></td>
+                        <td class="text-left"><h3 id="totalCost"><strong >$31.53</strong></h3></td>
                     </tr>
                     <tr>
-                        <td class="col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://placehold.it/72x72" style="width: 72px; height: 72px;" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                
-                                <span>Status: </span><span class="text-danger"><strong>Out of stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-md-1" style="text-align: center">
-                          
-                        <input type="text" class="form-control" id="text1" value="5">
-                        </td>
-                        <td class="col-md-1 text-center"><strong>$4.99</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                        <td class="col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
                         <td>   </td>
                         <td>
-                        <button type="button" class="btn btn-primary">Continue Shopping</button></td>
+                        <a type="button" href="/" class="btn btn-primary">Continue Shopping</a></td>
                         <td>
                         <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
+                            Pay Now <span class="glyphicon glyphicon-play"></span>
                         </button></td>
                     </tr>
                 </tbody>

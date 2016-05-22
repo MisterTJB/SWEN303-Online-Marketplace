@@ -66,7 +66,7 @@ function addToCart(){
     if (cart && cart.indexOf(productID) === -1){
         cart.push(productID);
         localStorage.setItem("cart", JSON.stringify(cart));
-    } else if (cart.indexOf(productID) === -1) {
+    } else {
         localStorage.setItem("cart", JSON.stringify([productID]));
     }
     toggleCartButton();

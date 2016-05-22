@@ -37,6 +37,40 @@ router.get('/:productid', function(req, res, next) {
     });
 });
 
+router.get('/:productid/raw', function(req, res, next) {
+
+    pg.connect(global.databaseURI, function(err, client, done) {
+        if(err){
+            console.error('Could not connect to the database');
+            console.error(err);
+            return;
+        }
+
+        var votes_required;
+        client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
+            votes_required = result.rows[0].value;
+        });
+
+        client.query("SELECT * FROM stock where sid='%PRODUCTID%';".replace("%PRODUCTID%", req.params.productid), function(error, result){
+            product = result.rows[0];
+            res.send({
+                title: product.label,
+                desc: product.description,
+                listed_by: product.voters[0],
+                voters: product.voters.slice(1),
+                votes: product.votes,
+                votesRequired: votes_required,
+                price: product.price,
+                stock: product.quantity,
+                meanValuation: mean(product.valuations),
+                valuersCount: product.valuers.length,
+                valuersList: product.valuers,
+                categories: []});
+        });
+
+    });
+});
+
 function mean(list){
     if (list.length > 0) {
         var sum = list.reduce(function (a, b) {
