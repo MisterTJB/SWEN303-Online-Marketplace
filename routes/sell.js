@@ -11,6 +11,7 @@ router.post('/', function(req, res, next) {
   pg.connect(global.databaseURI, function(err, client, done) {
     var TITLE = req.body.title;
     var DESCRIPTION = req.body.description;
+    DESCRIPTION = DESCRIPTION.replace(/'/g, "''");
     var PRICE = req.body.price;
     var CATEGORY = req.body.category;
     var USERNAME = req.body.username;
