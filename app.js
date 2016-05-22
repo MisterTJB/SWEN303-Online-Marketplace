@@ -24,6 +24,7 @@ var product = require('./routes/product');
 var account = require('./routes/account');
 var payment = require('./routes/payment');
 var admin = require('./routes/admin');
+var newQueue = require('./routes/new');
 
 // Endpoints
 var login = require('./routes/login-post');
@@ -65,6 +66,7 @@ app.use('/categories', categoriesEndpoint);
 app.use('/invite-code-endpoint', inviteCodesEndpoint);
 app.use('/payment', payment);
 app.use('/admin', admin);
+app.use('/new', newQueue);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

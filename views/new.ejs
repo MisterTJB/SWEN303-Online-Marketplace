@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Listings</title>
+    <% include ../views/templates/head %>
+    
+  </head>
+  <body>
+  
+  <% include ../views/templates/basic-header %>
+
+  <h1>New Listings</h1>
+  <div class="container">
+	<div class="bs-docs-section clearfix">
+        <!-- <h2 id="data-test">Categories</h3> -->
+        <div class="well">
+
+            <% for (result in results) {%>
+            <div class="row row-result" id=<%='result' + result%>>
+                <div class="col-lg-12">
+                    <h3>
+                        <a href=<%='/product/' + results[result].sid%> id=result-header>
+                            <%= results[result].label %>
+                        </a>
+                    </h3>
+                    <p>
+                        <b>$<%= results[result].price %> </b>
+                    </p>
+                    <p>
+                        <%= results[result].description %>
+                    </p>
+                </div>
+            </div>
+            <%}%>
+        </div>
+    </div>
+  </div>
+  </body>
+</html>
