@@ -152,7 +152,7 @@ router.post('/:productid/sold', function(req, res, next) {
 
 router.post('/:productid/setvaluation', function(req, res, next) {
 
-    console.log("POST to transactions/productid/setvaluation");
+    console.log("POST to products/productid/setvaluation");
 
     var productID = req.params.productid;
 
@@ -171,6 +171,30 @@ router.post('/:productid/setvaluation', function(req, res, next) {
             console.log(result);
             done();
         });
+
+    });
+});
+
+router.post('/:productid/delete', function(req, res, next) {
+
+    console.log("POST to products/productid/delete");
+
+    var productID = req.params.productid;
+
+    var QUERY = "UPDATE stock SET status='deleted' WHERE sid=%STOCKID%;".replace("%STOCKID%", productID);
+    console.log(QUERY);
+
+    pg.connect(global.databaseURI, function(err, client, done) {
+        if(err){
+            console.error('Could not connect to the database');
+            console.error(err);
+            return;
+        }
+
+        // client.query(QUERY, function(error, result){
+        //     console.log(result);
+        //     done();
+        // });
 
     });
 });

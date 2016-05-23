@@ -86,8 +86,8 @@ function displayProductComplaints(){
                 "</h3>" +
                 "<p>"  + data[complaint].complaint + "</p>" +
                     "<p>Authored by: " + data[complaint].username + "</p>" +
-                    "<a>Delete Product</a>" +
-                    "<a onclick='reviewedProductComplaint(%CID%)'>Dismiss</a>".replace("%CID%", data[complaint].cid) +
+                    "<a class='btn btn-danger' onclick='deleteProduct(%PID%, %CID%)'>Delete Product</a>".replace("%PID%", data[complaint].pid).replace("%CID%", data[complaint].cid) +
+                    "<a class='btn btn-info' onclick='reviewedProductComplaint(%CID%)'>Dismiss</a>".replace("%CID%", data[complaint].cid) +
                 "</li>" +
                 "<hr>"
 
@@ -106,12 +106,12 @@ function displayMemberComplaints(){
         for (complaint in data){
 
             var complaintHTML = "<li class='list-group-item' id='mComplaint%CID%'>".replace("%CID%", data[complaint].cid) +
-                "<h3>" + data[complaint].username +
+                "<h3 id='username'>" + data[complaint].username +
                 "</h3>" +
                 "<p>"  + data[complaint].complaint + "</p>" +
                 "<p>Authored by: " + data[complaint].complainant + "</p>" +
-                "<a>Delete Member</a>" +
-                "<a onclick='reviewedUserComplaint(%CID%)'>Dismiss</a>".replace("%CID%", data[complaint].cid) +
+                "<a class='btn btn-danger' onclick='deleteMember(%CID%)'>Delete Member</a>".replace("%CID%", data[complaint].cid) +
+                "<a class='btn btn-info' onclick='reviewedUserComplaint(%CID%)'>Dismiss</a>".replace("%CID%", data[complaint].cid) +
                 "<hr>" +
             "</li>"
 
@@ -132,4 +132,17 @@ function reviewedUserComplaint(cid){
 function reviewedProductComplaint(cid){
     $.post("/complaints/product/complaint/" + cid);
     $("#pComplaint" + cid).remove();
+}
+
+function deleteMember(cid){
+
+    $.post("/users-endpoint/" + username + "/delete/");
+    reviewedUserComplaint(cid);
+}
+
+function deleteProduct(pid, cid){
+
+
+    $.post("/product/" + pid + "/delete/");
+    reviewedProductComplaint(cid);
 }

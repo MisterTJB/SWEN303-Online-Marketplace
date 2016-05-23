@@ -124,4 +124,39 @@ router.get('/:name/sold', function(req, res, next) {
 
 });
 
+router.post('/:name/delete', function(req, res, next) {
+
+
+    pg.connect(global.databaseURI, function(err, client, done) {
+
+        // Prepare the SQL query using string interpolation to populate username and password
+        var QUERYSTRING = "DELETE FROM users WHERE username='%NAME%';".replace("%NAME%", req.params.name);
+
+        // Check whether the connection to the database was successful
+        if(err){
+            console.error('Could not connect to the database');
+            console.error(err);
+            return;
+        }
+
+        console.log('Connected to database');
+        console.log(QUERYSTRING);
+        // Execute the query -- an empty result indicates that the username:password pair does
+        // not exist in the database
+        // client.query(QUERYSTRING, function(error, result){
+        //
+        //     console.log(result);
+        //     console.log(error);
+        //     if(error) {
+        //         console.error('Failed to execute query');
+        //         console.error(error);
+        //         return;
+        //     }
+        //     res.send();
+        // });
+        done();
+    });
+
+});
+
 module.exports = router;

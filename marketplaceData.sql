@@ -80,7 +80,7 @@ CREATE TABLE user_complaints (
 --
 -- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
-CREATE TYPE listing_status AS ENUM ('pending', 'unsuccessful', 'listed', 'sold');
+CREATE TYPE listing_status AS ENUM ('pending', 'unsuccessful', 'listed', 'sold', 'deleted');
 CREATE TABLE stock (
     sid SERIAL,
     uid integer,
