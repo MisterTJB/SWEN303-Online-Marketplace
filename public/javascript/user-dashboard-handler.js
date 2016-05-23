@@ -12,17 +12,16 @@ $(document).ready(function(){
 });
 
 function loadPastOrders(){
-    var orderHtml = "<li class='list-group-item'>" +
-        "<h3>" + "sdgsdg" +
-        "</h3>" +
-        "<p>Listed at $" + 3 + "</p>" +
-        "<p>Valued at: $" + 3 +
-        "</p>" +
-        "<a>Sell For Valuation</a>" +
-        "</li>" +
-        "<hr>";
-
-    $("#dashboardData").append(html);
+    $("#dashboardData").empty();
+    $.get("/transactions/" + localStorage.getItem("loggedInAs"), function(data){
+       for (order in data){
+           $("#dashboardData").append("<li class='list-group-item' id='" + data[order].tid + "'><h2>Order #" + data[order].tid + "</h2></li>");
+           for (product in data[order].products){
+               $("#" + data[order].tid).append("<a href='/product/" + data[order].products[product] + "'>" + "Stuff</a>");
+           }
+           $("#" + data[order].tid).append("<hr>");
+       }
+    });
 }
 
 function generateInviteCode(){
@@ -39,13 +38,17 @@ function generateInviteCode(){
 }
 
 function mean(list){
-    var sum = list.reduce(function(a, b){return a+b;});
-    return sum/list.length;
+    if (list.length > 0){
+        var sum = list.reduce(function(a, b){return a+b;});
+        return sum/list.length;
+    } else {
+        return 0;
+    }
 }
 
 function listItemsForSale(){
-    
-    $.get("users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function(data){
+    $("#dashboardData").empty();
+    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function(data){
 
         for (element in data){
             var title = data[element].label;
@@ -66,4 +69,28 @@ function listItemsForSale(){
         }
     });
     
+}
+
+function listSoldItems(){
+    $("#dashboardData").empty();
+    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
+
+        for (element in data){
+            var title = data[element].label;
+            var price = data[element].price;
+            var valuations = data[element].valuations;
+
+            var html = "<li class='list-group-item'>" +
+                "<h3>" + title +
+                "</h3>" +
+                "<p>Listed at $" + price + "</p>" +
+                "<p>Valued at: $" + mean(valuations) +
+                "</p>" +
+                "</li>" +
+                "<hr>"
+
+            $("#dashboardData").append(html);
+        }
+    });
+
 }

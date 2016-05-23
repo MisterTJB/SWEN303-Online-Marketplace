@@ -32,6 +32,7 @@ router.get('/:productid', function(req, res, next) {
                 valuersCount: product.valuers.length,
                 valuersList: product.valuers,
                 categories: []});
+            done();
         });
 
     });
