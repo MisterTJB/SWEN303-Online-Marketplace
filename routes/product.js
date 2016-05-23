@@ -31,6 +31,7 @@ router.get('/:productid', function(req, res, next) {
                 meanValuation: mean(product.valuations),
                 valuersCount: product.valuers.length,
                 valuersList: product.valuers,
+                sellingAtList: product.selling_at_list,
                 categories: []});
             done();
         });

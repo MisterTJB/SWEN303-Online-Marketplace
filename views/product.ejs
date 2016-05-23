@@ -55,7 +55,7 @@
                         <p>Listed by <a id="listedBy"><%= listed_by%></a></p>
                         <hr>
 
-                        <% if (votes === votesRequired) {%>
+                        <% if (votes === votesRequired && sellingAtList) {%>
                         <h4>Average valuation $<%= meanValuation %> </h4>
                         <p>Valued by <%= valuersCount %> members</p>
                         <input placeholder="$0.00" id="valuationInput" \><br><br>
@@ -63,7 +63,13 @@
                         <hr>
 
                         <%} %>
-                        <h3 style="">Asking Price $<%= price %></h3>
+
+                        <% if (sellingAtList) {%>
+                            <h3 style="">Asking Price $<%= price %></h3>
+                        <% } else {%>
+                            <h3 style="">Valuation Price $<%= meanValuation %></h3>
+                            <p>Based on valuations by <%= valuersCount %> other members</p>
+                        <%}%>
 
 
                         <% if (votes >= votesRequired) {%>
