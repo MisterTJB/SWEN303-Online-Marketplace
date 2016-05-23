@@ -1,227 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Register</title>
-<% include ../views/templates/head %>
-<link rel='stylesheet' href='/stylesheets/pay.css' />
-  </head>
-  <body>
+<div class="credit-card-div">
+    <div class="panel panel-default">
+        <div class="panel-heading">
 
+            <div class="row ">
+                <div class="col-md-12 pad-adjust">
 
-  <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <a href="../" class="navbar-brand">Marketplace</a>
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="navbar-collapse collapse" id="navbar-main">
-        <ul class="nav navbar-nav">
-
-          <li>
-            <a href="/">Home</a>
-          </li>
-
-          <li>
-            <a href="">Help</a>
-          </li>
-
-        </ul>
-      </div>
+                    <input type="text" class="form-control" placeholder="Name On The Card">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="Enter Card Number">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <span class="help-block text-muted small-font"> Expiry Month</span>
+                    <input type="text" class="form-control" placeholder="MM">
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <span class="help-block text-muted small-font">  Expiry Year</span>
+                    <input type="text" class="form-control" placeholder="YY">
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <span class="help-block text-muted small-font">  CCV</span>
+                    <input type="text" class="form-control" placeholder="CCV">
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-
-  <div class="container" style="text-align:center;">
-    <div class="page-header">
-      <h1 id="navbar">Place Order</h1>
-    </div>
-    <div class="container" id="pay-con">
-  
-  <div class="container" id="pay-con">
-
-
-
-    <div class="col-lg-6" id="pay-col">
-    <div class="well">
-
-    <!-- Payment -->
-    <div id="payment">
-      <form class="form-horizontal" method="post" action="/pay">
-        <legend style="text-align:center">Make Payment</legend>
-
-            <!-- Card Type -->
-            <div class="form-group col-lg-12">
-              <label for="select" id="labels" >Card Type</label>
-              
-                  <select class="form-control" id="select">
-                    <option>VISA</option>
-                    <option>Master Card</option>
-                    <option>American Express</option>
-                  </select>
-                <br>
-              
-            </div>
-
-            <!-- Name on card field-->
-            <div class="form-group col-lg-12">
-              <label for="select" id="labels" >Name on card</label>
-                <input type="text" class="form-control" id="shortDesc" placeholder="Card Holder's Name">
-            </div>
-            
-
-        <!-- Card number field -->
-        <div class="form-group col-lg-12">
-          <label for="cardNumber" id="labels">Credit Card Number</label>
-            <input type="text" name="" class="form-control" id="cardNumberField" placeholder="Debit/Credit Card Number">
-        </div>
-
- <div class="form-group col-lg-12">
-        <label  for="expiry-month" id="labels">Expiration Date</label>
-        <div class="col-lg-12">
-            <div class="col-lg-6">
-              <select class="form-control " name="expiry-month" id="expiry-month">
-                <option>Month</option>
-                <option value="01">Jan (01)</option>
-                <option value="02">Feb (02)</option>
-                <option value="03">Mar (03)</option>
-                <option value="04">Apr (04)</option>
-                <option value="05">May (05)</option>
-                <option value="06">June (06)</option>
-                <option value="07">July (07)</option>
-                <option value="08">Aug (08)</option>
-                <option value="09">Sep (09)</option>
-                <option value="10">Oct (10)</option>
-                <option value="11">Nov (11)</option>
-                <option value="12">Dec (12)</option>
-              </select>
-            </div>
-            <div class="col-lg-6">
-              <select class="form-control" name="expiry-year">
-                <option value="13">2013</option>
-                <option value="14">2014</option>
-                <option value="15">2015</option>
-                <option value="16">2016</option>
-                <option value="17">2017</option>
-                <option value="18">2018</option>
-                <option value="19">2019</option>
-                <option value="20">2020</option>
-                <option value="21">2021</option>
-                <option value="22">2022</option>
-                <option value="23">2023</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card CVV -->
-        <div class="form-group col-lg-12">
-          <label for="cardCVV"  id="labels">Card CVV</label>
-            <input type="text" name="" class="form-control" id="cardCVV" placeholder="Security Code">
-        </div>
-
-        <!-- Pay Button -->
-        <div class="form-group">
-          <div class="col-lg-12 col-lg" id="button-holder">
-            <button type="submit" class="btn btn-primary btn-lg" id="pay-button" onclick="" >Pay</button>
-          </div>
-        </div>
-
-        </form>
-      </div>
-      </div>
-      </div>
-
-
-      <!-- Product Side -->
-      <div class="col-lg-6">
-        <div class="well">
-          <legend style="text-align:center">Items</legend>
-          
-    <div class="well">
-    <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover" id="cart-table">
-                <thead>
-                    <tr>
-                        <th><h4>Product</h4></th>
-                        <th><h4>Quantity</h4></th>
-                        <th class="text-center"><h4>Price</h4></th>
-                        <th class="text-center"><h4>Total</h4></th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-sm-8 col-md-6">
-                        <div class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                            </div>
-                        </div></td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
-
-                    </tr>
-                    <tr>
-                        <td class="col-md-6">
-                        <div class="media">
-                            
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                            </div>
-                        </div></td>
-                        <td class="col-md-1" style="text-align: center">
-                          
-                        <input type="text" class="form-control" id="text1" value="5">
-                        </td>
-                        <td class="col-md-1 text-center"><strong>$4.99</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                        <td class="col-md-1">
-
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </body>
-</html>
-
+</div>
