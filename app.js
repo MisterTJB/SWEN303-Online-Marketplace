@@ -19,7 +19,7 @@ var users = require('./routes/users');
 var register = require('./routes/register');
 var sell = require('./routes/sell');
 var cart = require('./routes/cart');
-var searching = require('./routes/searching');
+var search = require('./routes/search');
 var product = require('./routes/product');
 var account = require('./routes/account');
 var payment = require('./routes/payment');
@@ -57,7 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     
 
 app.use('/', routes);
-app.use('/', searching);
+app.use('/search', search);
 app.use('/users', users);
 app.use('/register', register);
 app.use('/product', product);
