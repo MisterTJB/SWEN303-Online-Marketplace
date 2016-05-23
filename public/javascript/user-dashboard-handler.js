@@ -64,8 +64,8 @@ function listItemsForSale(){
                 var totalValuations = valuations.length;
 
                 var html = "<li class='list-group-item'>" +
-                    "<h3>" + title +
-                    "</h3>" +
+                    "<h3><a href='/product/%HREF%'>".replace("%HREF%", id) + title +
+                    "</h3></a>" +
                     "<p>Listed at $" + price + "</p>" +
                     "<p>Valued at: $" + mean(valuations) +
                     "</p>" +
