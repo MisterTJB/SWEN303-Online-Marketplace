@@ -75,7 +75,8 @@ router.post('/', function(req, res, next) {
 
         res.redirect("/product/" + result.rows[0].sid);
       }
-    })
+    });
+    done();
   });
 
 

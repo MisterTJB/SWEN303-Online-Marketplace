@@ -48,27 +48,44 @@ function mean(list){
 
 function listItemsForSale(){
     $("#dashboardData").empty();
-    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function(data){
 
-        for (element in data){
-            var title = data[element].label;
-            var price = data[element].price;
-            var valuations = data[element].valuations;
+    var valuationsRequired;
+    $.get("/parameters/valuations-required", function(valuationData) {
+        valuationsRequired = valuationData.value;
 
-            var html = "<li class='list-group-item'>" +
-                "<h3>" + title +
-                "</h3>" +
-            "<p>Listed at $" + price + "</p>" +
-            "<p>Valued at: $" + mean(valuations) +
-            "</p>" +
-            "<a>Sell For Valuation</a>" +
-            "</li>" +
-            "<hr>"
+        $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function (data) {
 
-            $("#dashboardData").append(html);
-        }
+
+            for (element in data) {
+                var title = data[element].label;
+                var id = data[element].sid;
+                var price = data[element].price;
+                var valuations = data[element].valuations;
+                var totalValuations = valuations.length;
+
+                var html = "<li class='list-group-item'>" +
+                    "<h3>" + title +
+                    "</h3>" +
+                    "<p>Listed at $" + price + "</p>" +
+                    "<p>Valued at: $" + mean(valuations) +
+                    "</p>" +
+                    "%VALUATION%" +
+                    "</li>" +
+                    "<hr>"
+
+                console.log(totalValuations);
+                console.log(valuationsRequired);
+                if (totalValuations >= valuationsRequired){
+                    html = html.replace("%VALUATION%", "<a id='valuation' onclick='sellForValuation(%ID%)'>Sell For Valuation</a>".replace("%ID%", id));
+                } else {
+                    html = html.replace("%VALUATION%", "<p>Requires %N% more valuations before the community price can be selected</p>".replace("%N%", valuationsRequired-totalValuations));
+                }
+
+                $("#dashboardData").append(html);
+            }
+        });
+
     });
-    
 }
 
 function listSoldItems(){
@@ -93,4 +110,10 @@ function listSoldItems(){
         }
     });
 
+}
+
+function sellForValuation(productID){
+    $.post("/product/" + productID + "/setvaluation", function(data){
+        $("#valuation").prop('disabled', true);
+    });
 }

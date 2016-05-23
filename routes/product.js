@@ -149,5 +149,31 @@ router.post('/:productid/sold', function(req, res, next) {
     });
 });
 
+router.post('/:productid/setvaluation', function(req, res, next) {
+
+    console.log("POST to transactions/productid/setvaluation");
+
+    var productID = req.params.productid;
+
+    console.log("Setting product with id " + productID + "to 'sold'");
+    var QUERY = "UPDATE stock SET selling_at_list=false WHERE sid=%STOCKID%;".replace("%STOCKID%", productID);
+    console.log(QUERY);
+
+    pg.connect(global.databaseURI, function(err, client, done) {
+        if(err){
+            console.error('Could not connect to the database');
+            console.error(err);
+            return;
+        }
+
+        client.query(QUERY, function(error, result){
+            console.log(result);
+            done();
+        });
+
+    });
+});
+
+
 
 module.exports = router;
