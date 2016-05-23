@@ -61,6 +61,22 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+CREATE TABLE product_complaints (
+    cid SERIAL,
+    pid integer,
+    username character varying(50),
+    complaint text,
+    reviewed boolean DEFAULT false
+);
+
+CREATE TABLE user_complaints (
+    cid SERIAL,
+    complainant character varying(50),
+    username character varying(50),
+    complaint text,
+    reviewed boolean DEFAULT false
+);
+
 --
 -- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --

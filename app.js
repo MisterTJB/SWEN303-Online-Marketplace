@@ -34,6 +34,8 @@ var inviteCodesEndpoint = require("./routes/invite-code-endpoint");
 var valuationEndpoint = require("./routes/valuation-endpoint");
 var transactionsEndpoint = require("./routes/transactions-endpoint");
 var siteParametersEndpoint = require("./routes/site-parameters-endpoint");
+var productComplaintsEndpoint = require("./routes/product-complaints-endpoint");
+var userComplaintsEndpoint = require("./routes/user-complaints-endpoint");
 
 //Just for testing
 var product = require('./routes/product');
@@ -73,6 +75,9 @@ app.use('/new', newQueue);
 app.use('/valuation', valuationEndpoint);
 app.use('/transactions', transactionsEndpoint);
 app.use('/parameters', siteParametersEndpoint);
+app.use('/complaints/product', productComplaintsEndpoint);
+app.use('/complaints/user', userComplaintsEndpoint);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

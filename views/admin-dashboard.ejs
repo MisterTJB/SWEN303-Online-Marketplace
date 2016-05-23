@@ -24,26 +24,19 @@
            <div class="col-lg-3 col-md-3 col-sm-4">
             <div class="list-group table-of-contents">
               <h3 class="list-group-item" Style="color:#bf5a16;"><b>Curate</b></h3>
-              <a class="list-group-item">Edit Categories</a>
-              <a class="list-group-item">Review Complaints</a>
-              <a class="list-group-item">Delete A User</a>
+              <a class="list-group-item" onclick="displayCategoryTree()">Edit Categories</a>
+              <a class="list-group-item" onclick="displayMemberComplaints()">Member Complaints</a>
+                <a class="list-group-item" onclick="displayProductComplaints()">Product Complaints</a>
 
               <h3 class="list-group-item" Style="color:#bf5a16;"><b>Configure</b></h3>
               <a class="list-group-item" >Voting</a>
               <a class="list-group-item" >Valuation</a>
-              <a class="list-group-item" >Complaints</a>
             </div>
           </div>
           <div class="col-lg-9">
-              <ul class="list-group" id="dashboardData">
-                  <div id="tree"></div>
-                  <form>
-                      <a>Rename</a>
-                      <a>Delete</a>
-                      <a>Add Sibling</a>
-                      <a>Add Child</a>
-                  </form>
-              </ul>
+              <div class="list-group" id="dashboardData">
+
+              </div>
           </div>
         </div>
 

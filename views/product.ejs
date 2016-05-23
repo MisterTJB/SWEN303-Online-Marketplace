@@ -102,10 +102,58 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <a>Problem with this listing?</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productComplaintModal" data-whatever="@mdo">Problem With This Listing?</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userComplaintModal" data-whatever="@fat">Problem With This Member?</button>
+
+
+            <div class="modal fade" id="productComplaintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">What's wrong with this product?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label"></label>
+                                    <textarea class="form-control" id="product-complaint-text"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendProductComplaint()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="userComplaintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">How did this member hurt you?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label"></label>
+                                    <textarea class="form-control" id="user-complaint-text"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendUserComplaint()">Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+
 </body>
 
 </html>

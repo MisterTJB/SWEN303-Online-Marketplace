@@ -80,3 +80,22 @@ function removeFromCart(){
     localStorage.setItem("cart", JSON.stringify(cart));
     toggleCartButton();
 }
+
+function sendUserComplaint(){
+    var productID = window.location.pathname.split("/")[window.location.pathname.split("/").length - 1];
+    var postData = {complainant : localStorage.getItem("loggedInAs"), complaint: $("#user-complaint-text").val(), productid: productID}
+    $.post("/complaints/user", postData, function(data){
+
+    });
+    $("#user-complaint-text").val('');
+}
+
+function sendProductComplaint(){
+    var productID = window.location.pathname.split("/")[window.location.pathname.split("/").length - 1];
+    var postData = {username: localStorage.getItem("loggedInAs"), complaint: $("#product-complaint-text").val()}
+    $.post("/complaints/product/" + productID, postData, function(data){
+
+
+    });
+    $("#product-complaint-text").val('');
+}
