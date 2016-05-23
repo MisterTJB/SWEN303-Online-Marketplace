@@ -4,6 +4,27 @@
 
 var codeGenerated = false;
 
+$(document).ready(function(){
+    if(localStorage.getItem("referrer") === "pay"){
+        $("#pastOrders").click();
+        localStorage.removeItem("referrer");
+    }
+});
+
+function loadPastOrders(){
+    var orderHtml = "<li class='list-group-item'>" +
+        "<h3>" + "sdgsdg" +
+        "</h3>" +
+        "<p>Listed at $" + 3 + "</p>" +
+        "<p>Valued at: $" + 3 +
+        "</p>" +
+        "<a>Sell For Valuation</a>" +
+        "</li>" +
+        "<hr>";
+
+    $("#dashboardData").append(html);
+}
+
 function generateInviteCode(){
 
     var userid = sessionStorage.getItem("loggedInAs");

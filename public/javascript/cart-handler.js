@@ -51,6 +51,21 @@ function removeFromCart(productID){
 }
 
 function paid(){
+
+
+    var cart = JSON.parse(localStorage.getItem('cart'));
+    for (product in cart){
+        $.post("/product/" + cart[product] + "/sold", function(data){
+        });
+    }
+
+
+    var postData = {cartArray: cart};
+    $.post("/transactions/" + localStorage.getItem("loggedInAs") + "/order", postData, function(data){
+        console.log(data);
+    });
+
     localStorage.setItem("cart", JSON.stringify([]));
+    localStorage.setItem("referrer", "pay");
     window.location.replace("/users/" + localStorage.getItem("loggedInAs"));
 }

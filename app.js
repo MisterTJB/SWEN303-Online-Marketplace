@@ -32,6 +32,7 @@ var usersEndpoint = require("./routes/users-endpoint");
 var categoriesEndpoint = require("./routes/categories-endpoint");
 var inviteCodesEndpoint = require("./routes/invite-code-endpoint");
 var valuationEndpoint = require("./routes/valuation-endpoint");
+var transactionsEndpoint = require("./routes/transactions-endpoint");
 
 //Just for testing
 var product = require('./routes/product');
@@ -69,6 +70,7 @@ app.use('/payment', payment);
 app.use('/admin', admin);
 app.use('/new', newQueue);
 app.use('/valuation', valuationEndpoint);
+app.use('/transactions', transactionsEndpoint);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
