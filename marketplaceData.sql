@@ -89,12 +89,12 @@ CREATE TABLE stock (
     price numeric(10,4),
     quantity integer,
     category ltree,
-    status listing_status,
-    votes integer,
-    voters text[],
-    selling_at_list boolean,
-    valuations numeric(10,4)[],
-    valuers text[]
+    status listing_status DEFAULT 'pending',
+    votes integer DEFAULT 0,
+    voters text[] DEFAULT ARRAY[]::text[],
+    selling_at_list boolean DEFAULT true,
+    valuations numeric(10,4)[] DEFAULT ARRAY[]::numeric(10,4)[],
+    valuers text[] DEFAULT ARRAY[]::text[]
 );
 
 CREATE TABLE site_parameters (
@@ -224,13 +224,13 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 -- Data for Name: stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'pending', 3, ARRAY['admin', 'MEME', 'test'], true, ARRAY[]::numeric(10,4)[], ARRAY[]::text[]);
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (1,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (2,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'unsuccessful');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (3,	'Snakes and Ladders','Description',	1.0000,	1,   'Games.Board_Games.Childrens', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (3,	'Monopoly',	'Description', 3.00,	1,   'Games.Board_Games.Evil', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (4,	'Holy Grail',	'Description',0.99,	1,   'Artefacts.Religious', 'listed');
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'pending', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[]::numeric(10,4)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (1,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful', 2, ARRAY['admin', 'j0nny'], true, ARRAY[]::numeric(10,4)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (2,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'unsuccessful');
+INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'pending');
+INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (3,	'Snakes and Ladders','Description',	1.0000,	1,   'Games.Board_Games.Childrens', 'pending');
+INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (3,	'Monopoly',	'Description', 3.00,	1,   'Games.Board_Games.Evil', 'pending');
+INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (4,	'Holy Grail',	'Description',0.99,	1,   'Artefacts.Religious', 'pending');
 --INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Meaning of Life',	'Description',42.00,	20,  'Truths.Existential', 'listed');
 --INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Cactus',	'Description',9.99,	3,   'Plants.Succulent.Evil.Prickly', 'listed');
 --INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Iris',	'Description',9.99,	15,  'Plants.Perennial', 'listed');

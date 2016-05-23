@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
                      var top = path.split(".")[0];
                      resultSet.add(top);
                  }
-                 res.render('index', {categories: Array.from(resultSet).sort()});
+                 res.render('index');
              });
          });
     });

@@ -101,46 +101,41 @@
         <div id="filter-panel" class="collapse filter-panel">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <div class="form-group">
+
+                        <select id="sel-sortBy" class="form-control">
+                            <option>Sort by</option>
+                            <option>Price</option>
+                            <option>Title</option>
+                        </select>
+                    </div> <!-- form group [order by] -->
+
+                    <div class="form-group">
+                        <label class="filter-col" style="margin-right:0;" id="advanced-search" for="pref-search">Min $:</label>
+                        <input type="text" class="form-control input-sm" id="min-price">
+                    </div><!-- form group [search] -->
+                    <div class="form-group">
+                        <label class="filter-col" id="advanced-search" style="margin-right:0;" for="pref-search">Max $:</label>
+                        <input type="text" class="form-control input-sm" id="max-price">
+                    </div><!-- form group [search] -->
+                    <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                        <label id="advanced-search"><input type="checkbox" id="chk-stock"> In Stock</label>
+                    </div>
+                    </form>
+                </div>
                     <form class="form-inline" role="form">
                         <div class="form-group">
-                            
-                            <select id="sel-category" class="form-control">
-                                <option value="2">Furniture</option>
-                                <!-- Categories pulled from database stock table (temporarily removed due to conflicts)-->
-
-
-                                <option selected="selected" value="Category">Category</option>
-                            </select>                                
+                            <div id="tree"></div>
                         </div> <!-- form group [rows] -->
                         
 
-                        <div class="form-group">
-                            
-                            <select id="sel-sortBy" class="form-control">
-                                <option>Sort by</option>
-                                <option>Price</option>
-                                <option>Title</option>
-                            </select>                                
-                        </div> <!-- form group [order by] --> 
 
-                        <div class="form-group">
-                            <label class="filter-col" style="margin-right:0;" id="advanced-search" for="pref-search">Min $:</label>
-                            <input type="text" class="form-control input-sm" id="min-price">
-                        </div><!-- form group [search] -->
-                        <div class="form-group">
-                            <label class="filter-col" id="advanced-search" style="margin-right:0;" for="pref-search">Max $:</label>
-                            <input type="text" class="form-control input-sm" id="max-price">
-                        </div><!-- form group [search] -->
-                        <div class="checkbox" style="margin-left:10px; margin-right:10px;">
-                                <label id="advanced-search"><input type="checkbox" id="chk-stock"> In Stock</label>
-                            </div>
-                    </form>
-                </div>
             </div>
         </div>    
         <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel" onclick="toggleAdvanced()" id="adv-button">
             <span class="glyphicon glyphicon-cog"></span> Advanced Search
         </button>
+
   </div>
 </div>
 </div>

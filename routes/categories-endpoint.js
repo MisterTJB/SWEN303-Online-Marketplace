@@ -41,6 +41,7 @@ router.get('/', function(req, res, next) {
             }
             res.send(Array.from(resultSet).sort());
         });
+        done();
     });
 
 });
