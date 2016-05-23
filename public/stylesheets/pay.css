@@ -10,3 +10,17 @@
 #pay-col {
 
 }
+
+#title {
+	color: #df691a;
+}
+
+#pay-button {
+	width: 45%;
+	margin-right: 2%;
+}
+
+#pay-numbers {
+	color: white;
+	font-size: 150%;
+}

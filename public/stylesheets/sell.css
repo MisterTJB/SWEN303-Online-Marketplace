@@ -2,11 +2,12 @@
 .image-preview-input {
     position: relative;
     overflow: hidden;
-	margin: 0px;    
+    margin: 0px;    
     color: #333;
     background-color: #fff;
     border-color: #ccc;    
 }
+
 .image-preview-input input[type=file] {
 	position: absolute;
 	top: 0;
@@ -18,6 +19,7 @@
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
+
 .image-preview-input-title {
     margin-left:2px;
 }
