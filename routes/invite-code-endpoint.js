@@ -17,6 +17,7 @@ router.post('/', function(req, res, next) {
         client.query("INSERT INTO invite_codes VALUES (uuid_generate_v4(), '%USERID%', false) RETURNING code".replace("%USERID%", userid), function(error, result){
 
             res.send(result);
+            done();
         });
     });
 });
