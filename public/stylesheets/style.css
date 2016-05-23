@@ -12,24 +12,27 @@ a {
 }
 
 #email {
-    padding: 3%;
     margin-bottom: 5%;
     margin-top: 5%;
 }
 
 #password {
- padding: 3%;   
  margin-bottom: 5%;
 }
 
 .dropdown-menu-large {
     text-align: center;
     display:none;
-    position: absolute;
-    top: 100%; /*sets the top edge of the element above/below top edge of nearest ancestor*/
+    position: center;
+    top: 100%;
     left:50%;
     transform:translateX(+15%);
-    padding: 3%;
+    margin: 10%;
+}
+
+#login-col {
+  text-align: center;
+  
 }
 
 #loginButton {
@@ -52,10 +55,6 @@ a {
 
 #category-row {
     text-align: center;
-    
-}
-
-.row-result {
     
 }
 
