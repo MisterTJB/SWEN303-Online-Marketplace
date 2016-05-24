@@ -13,6 +13,7 @@ $(document).ready(function(){
 
 function loadPastOrders(){
     $("#dashboardData").empty();
+    $("#dashboardData").append("<h4>Past orders</h4>");
     $.get("/transactions/" + localStorage.getItem("loggedInAs"), function(data){
         if(data.length === 0){
             $("#dashboardData").append("<h4>You haven't ordered anything yet<h4>");
@@ -20,7 +21,10 @@ function loadPastOrders(){
        for (order in data){
            $("#dashboardData").append("<li class='list-group-item' id='" + data[order].tid + "'><h2>Order #" + data[order].tid + "</h2></li>");
            for (product in data[order].products){
-               $("#" + data[order].tid).append("<a href='/product/" + data[order].products[product] + "'>" + "Stuff</a>");
+               $.get("/product/" + data[order].products[product] + "/raw", function(productData){
+                   console.log(productData);
+                $("#" + data[order].tid).append("<a href='/product/" + data[order].products[product] + "'>" + productData.title + "</a>");
+               });
            }
            $("#" + data[order].tid).append("<hr>");
        }
