@@ -29,6 +29,7 @@ router.post('/', function(req, res, next) {
     var id = req.body.productid;
     var complainant = req.body.complainant;
     var complaint = req.body.complaint;
+    var user = req.body.username;
 
     console.log(req.body);
 
@@ -40,9 +41,10 @@ router.post('/', function(req, res, next) {
             return;
         }
 
-        var QUERY = "INSERT INTO user_complaints(complainant, username, complaint) VALUES ('%USER%', (SELECT username FROM users WHERE uid=(SELECT uid FROM stock WHERE sid=%PID%)), '%COMPLAINT%');";
+        var QUERY = "INSERT INTO user_complaints(complainant, username, complaint) VALUES ('%USER%', '%ABOUT_USER%', '%COMPLAINT%');";
         QUERY = QUERY.replace("%PID%", id);
         QUERY = QUERY.replace("%USER%", complainant);
+        QUERY = QUERY.replace("%ABOUT_USER%", user);
         QUERY = QUERY.replace("%COMPLAINT%", complaint.replace(/'/g, "''"));
 
         console.log(QUERY);

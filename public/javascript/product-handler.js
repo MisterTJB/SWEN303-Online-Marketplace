@@ -34,6 +34,8 @@ $(document).ready(function(){
         $("#downButton").prop('disabled', true);
     }
 
+    populateUserComplaintDropdown();
+
     toggleCartButton();
 
 });
@@ -83,11 +85,38 @@ function removeFromCart(){
 
 function sendUserComplaint(){
     var productID = window.location.pathname.split("/")[window.location.pathname.split("/").length - 1];
-    var postData = {complainant : localStorage.getItem("loggedInAs"), complaint: $("#user-complaint-text").val(), productid: productID}
+    var username = getSelectedUser();
+    console.log(username);
+    var postData = {username : username, complainant : localStorage.getItem("loggedInAs"), complaint: $("#user-complaint-text").val(), productid: productID}
     $.post("/complaints/user", postData, function(data){
 
     });
     $("#user-complaint-text").val('');
+}
+
+function getSelectedUser(){
+    return $( "#selectUser option:selected" ).text();
+}
+
+function populateUserComplaintDropdown(){
+    $.get(window.location.pathname + "/raw", function(data){
+        console.log(data);
+        var users = new Set();
+        for (voter in data.voters){
+            users.add(data.voters[voter]);
+        }
+        for (valuer in data.valuersList){
+            users.add(data.valuersList[valuer]);
+        }
+        console.log(users);
+        var userArray = Array.from(users).sort();
+
+        var options = "";
+        for (user in userArray){
+            options = options + "<option>%USER%</option>".replace("%USER%", userArray[user]);
+        }
+        $("#selectUser").append(options);
+    });
 }
 
 function sendProductComplaint(){
