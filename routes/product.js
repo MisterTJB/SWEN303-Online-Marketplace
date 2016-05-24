@@ -16,14 +16,15 @@ router.get('/:productid', function(req, res, next) {
         client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
             votes_required = result.rows[0].value;
         });
-
-        client.query("SELECT * FROM (stock JOIN users ON stock.uid=users.uid) WHERE sid='%PRODUCTID%';".replace("%PRODUCTID%", req.params.productid), function(error, result){
+        
+        console.log("SELECT * FROM (stock JOIN users ON stock.uid=users.uid) WHERE sid=%PRODUCTID%;".replace("%PRODUCTID%", req.params.productid));
+        client.query("SELECT * FROM (stock JOIN users ON stock.uid=users.uid) WHERE sid=%PRODUCTID%;".replace("%PRODUCTID%", req.params.productid), function(error, result){
             product = result.rows[0];
             res.render("product", {
                 title: product.label,
                 desc: product.description,
                 listed_by: product.username,
-                voters: product.voters,
+                voters: product.voters.slice(1),
                 votes: product.votes,
                 votesRequired: votes_required,
                 price: product.price,
