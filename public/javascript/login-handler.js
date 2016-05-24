@@ -18,7 +18,7 @@ function login(){
     var email = $("#email").val();
     var password = $("#password").val();
     var credentials = {email: email, password: password}
-    $.post("login", credentials, function(data){
+    $.post("/login", credentials, function(data){
 
         if (data === true){
             loginSuccess(email);
