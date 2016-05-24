@@ -18,7 +18,7 @@ function login(){
     var email = $("#email").val();
     var password = $("#password").val();
     var credentials = {email: email, password: password}
-    $.post("login", credentials, function(data){
+    $.post("/login", credentials, function(data){
 
         if (data === true){
             loginSuccess(email);
@@ -33,12 +33,17 @@ function login(){
  * whether the loggedInAs property is set in sessionStorage.
  */
 function toggleLoginLogout(){
-    if (window.sessionStorage.getItem("loggedInAs") != null){
+    console.log("Checking login status");
+    if (localStorage.getItem("loggedInAs") != null){
         $("#logoutLink").show();
         $("#menuBarLogin").hide();
+        $("#cartButton").show();
+        $("#accountButton").show();
     } else {
         $("#logoutLink").hide();
         $("#menuBarLogin").show();
+        $("#cartButton").hide();
+        $("#accountButton").hide();
     }
 }
 
@@ -46,9 +51,10 @@ function toggleLoginLogout(){
  * Handler for a successful login
  */
 function loginSuccess(email){
-    window.sessionStorage.setItem("loggedInAs", email);
+    localStorage.setItem("loggedInAs", email);
     toggleLoginLogout();
     console.log("Successfully logged in");
+    window.location.replace("/");
 }
 
 
@@ -63,6 +69,7 @@ function loginFailure(){
  * Handler for logging out
  */
 function logout(){
-    window.sessionStorage.removeItem("loggedInAs");
+    localStorage.removeItem("loggedInAs");
     toggleLoginLogout();
+    window.location.replace("/");
 }

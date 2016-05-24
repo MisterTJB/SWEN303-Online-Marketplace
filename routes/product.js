@@ -17,12 +17,12 @@ router.get('/:productid', function(req, res, next) {
             votes_required = result.rows[0].value;
         });
 
-        client.query("SELECT * FROM stock where sid='%PRODUCTID%';".replace("%PRODUCTID%", req.params.productid), function(error, result){
+        client.query("SELECT * FROM (stock JOIN users ON stock.uid=users.uid) WHERE sid='%PRODUCTID%';".replace("%PRODUCTID%", req.params.productid), function(error, result){
             product = result.rows[0];
             res.render("product", {
                 title: product.label,
                 desc: product.description,
-                listed_by: product.voters[0],
+                listed_by: product.username,
                 voters: product.voters.slice(1),
                 votes: product.votes,
                 votesRequired: votes_required,
@@ -191,10 +191,10 @@ router.post('/:productid/delete', function(req, res, next) {
             return;
         }
 
-        // client.query(QUERY, function(error, result){
-        //     console.log(result);
-        //     done();
-        // });
+        client.query(QUERY, function(error, result){
+            console.log(result);
+            done();
+        });
 
     });
 });

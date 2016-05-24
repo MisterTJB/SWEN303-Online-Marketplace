@@ -20,7 +20,7 @@
             </li>
 
               <li>
-                  <a href="/new">New Listings</a>
+                  <a id="newListings" href="/new">New Listings</a>
               </li>
 
           </ul>
@@ -28,6 +28,7 @@
           <ul class="nav navbar-nav navbar-right" id="cssmenu">
             <li id="logoutLink">
               <a class="btn btn-link" onclick="logout()">Logout</a>
+
             </li>
             <li class="dropdown dropdown-large" id="menuBarLogin">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login/Register <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span></a>
@@ -39,7 +40,6 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="login()" id="loginButton">Login</button>
                   </form>
                   <a class="btn btn-success btn-sm" id="register-but" href="/register">Register</a>
-                  <a href="/reset-password">Forgot password?</a>
             </li>
               </ul>
             </li>
@@ -82,11 +82,11 @@
                       
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                      <li class="search-link"><a href="/cart">Cart &nbsp;<span class="glyphicon glyphicon-shopping-cart"></span>
+                      <li class="search-link"><a id="cartButton" href="/cart">Cart &nbsp;<span class="glyphicon glyphicon-shopping-cart"></span>
                       </a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                      <li class="search-link"><a href="/account">My account &nbsp;</a></li>
+                      <li class="search-link"><a id="accountButton" href="/account">My account &nbsp;</a></li>
                     </ul>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
                                 <input type="text" class="form-control input-sm" id="max-price">
                             </div><!-- form group [search] -->
                             <div class="checkbox" style="margin-left:10px; margin-right:10px;">
-                                <label id="advanced-search"><input type="checkbox" id="chk-stock"> Valued</label>
+                                <label id="advanced-search"><input type="checkbox" id="chk-stock">Valued</label>
                             </div>
                             <input hidden name="category" id="category" />
                             <div id="tree"></div>

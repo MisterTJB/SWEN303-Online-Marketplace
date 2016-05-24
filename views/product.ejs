@@ -52,7 +52,7 @@
                 <div class="col-md-6">
                     <div class="well">
                         <h1><%= title %></h1>
-                        <p>Listed by <a id="listedBy"><%= listed_by%></a></p>
+                        <p>Listed by <a id="listedBy" href=<%="/search/" +  listed_by %> ><%= listed_by%></a></p>
                         <hr>
 
                         <% if (votes === votesRequired && sellingAtList) {%>

@@ -5,6 +5,15 @@ function toggleAdvanced(){
 	advanced = !advanced;
 }
 
+function serialise(obj) {
+	var str = [];
+	for(var p in obj)
+		if (obj.hasOwnProperty(p)) {
+			str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+		}
+	return str.join("&");
+}
+
 
 function search(){
      var value = document.getElementById('search-box').value;
@@ -13,80 +22,24 @@ function search(){
 
      // Advanced search variables
     var cat = $('#sel-catagory :selected').text();
-    var sort = $('#sel-sortBy :selected').text();
     var min =  $('#min-price').val();
     var max =  $('#max-price').val();
-    var showInStock = $("#chk-stock").is(':checked');
+    var valued = $("#chk-stock").is(':checked');
+	var category = $("#category").val();
     var isExpanded = $("#filter-panel").attr("aria-expanded");
 
-   var parameters = { search: value,
-   					   catagory: cat,
-   					   sortBy: sort,
+   var parameters = { q: value,
+   					   category: category,
    					   minPrice:min,
    					   maxPrice:max,
-   					   inStockOnly:showInStock,
+   					   valued:valued,
    					   adv:advanced
    					};
 
-  $.get( '/searching', parameters, function(data) {
- 
-      if(data == null){
-      	console.log("No results from search query");
-      }
-      else{
-      		showResults(data);
-       }				 
-    });
+	console.log();
+	window.location.replace("/search?" + serialise(parameters));
 }
 
-function showResults(rows){
-
-	// Remove the old results
-	$( ".row-result" ).remove();
-
-	var cur_id = 1;
-
-	var i;
-	for(i = 0; i < rows.length; i++){
-		var title = rows[i].label;
-		var price = rows[i].price;
-		var quantity = rows[i].quantity;
-		var description = rows[i].description;
-              var rating = 3;//TODO add to product later
-	  	var link =  "/product/"+rows[i].sid;//Unique identifier
-
-	  	var stock = "Out of Stock";
-	  	var style = "Color:red;"
-
-	  	// If in stock set color to green
-	  	if(quantity > 0){
-	  		stock = "In Stock";
-	  		style = "Color:green;"
-	  	}
-
-	  var div = document.createElement("div");
-
-        var ratingHTML = '<div class="rating">';
-
-        // for(var i = 1; i < 6; i++){
-        //     if(i < rating){
-        //           ratingHTML += '<span>★</span>';
-        //     }
-        //     else {
-        //           ratingHTML += '<span>☆</span>';
-        //     }
-        // }
-        ratingHTML +='</div>';
-
-	  div.innerHTML = '<div class="row row-result" id=resultDiv'+cur_id+'><div class="col-lg-12"><h3><a href='+link+' id=result-header>'+ title+'</a></h3><h3>'+ratingHTML+'</h3><h4 style="'+style+'">'+stock+'</h4><p><b>$'+price+'</b></p><p >'+description+'</p></div></div>';
-
-	  var tId = cur_id -1;
-
-	$( div ).insertBefore( $( "#resultDiv0" ) ); 
-
-	 cur_id++;
-	}
-}
 
 $(document).ready( function() {
  $('#main-search').on('keyup keypress', function(e) {
