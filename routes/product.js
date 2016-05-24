@@ -23,7 +23,7 @@ router.get('/:productid', function(req, res, next) {
                 title: product.label,
                 desc: product.description,
                 listed_by: product.username,
-                voters: product.voters.slice(1),
+                voters: product.voters,
                 votes: product.votes,
                 votesRequired: votes_required,
                 price: product.price,
@@ -33,8 +33,9 @@ router.get('/:productid', function(req, res, next) {
                 valuersList: product.valuers,
                 sellingAtList: product.selling_at_list,
                 categories: []});
-            done();
+
         });
+        done();
 
     });
 });
@@ -69,6 +70,7 @@ router.get('/:productid/raw', function(req, res, next) {
                 valuersList: product.valuers,
                 categories: []});
         });
+        done();
 
     });
 });
@@ -122,6 +124,7 @@ router.post('/:productid', function(req, res, next) {
                 console.log(QUERY);
             });
         }
+        done();
         res.send();
 
     });
@@ -147,6 +150,7 @@ router.post('/:productid/sold', function(req, res, next) {
         client.query(QUERY, function(error, result){
             console.log(result);
         });
+        done();
     });
 });
 
@@ -171,6 +175,7 @@ router.post('/:productid/setvaluation', function(req, res, next) {
             console.log(result);
             done();
         });
+        done();
 
     });
 });
