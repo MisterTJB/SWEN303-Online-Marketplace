@@ -50,7 +50,7 @@ function createQueryAdvanced(q, category, min, max, valued ){
     var QUERY = "SELECT * FROM stock";
 
     if(q){
-        QUERY = QUERY + " WHERE lower(label) LIKE '%_SEARCH_%'".replace("_SEARCH_", search);
+        QUERY = QUERY + " WHERE lower(label) LIKE '%_SEARCH_%'".replace("_SEARCH_", q);
     }
 
     if (category){
