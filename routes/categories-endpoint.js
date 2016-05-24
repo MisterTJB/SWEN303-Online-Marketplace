@@ -64,14 +64,14 @@ router.post('/permitted/add', function(req, res, next) {
  * Removes a permitted category from permitted_categories and drops stock in that category
  */
 router.post('/delete', function(req, res, next) {
-    console.log("DELETE FROM permitted_categories WHERE category <@ '%CATEGORY%';".replace(req.body.category));
-    console.log("UPDATE stock SET status='deleted' WHERE category <@ '%CATEGORY'%;".replace(req.body.category));
+    console.log("DELETE FROM permitted_categories WHERE category <@ '%CATEGORY%';".replace("%CATEGORY%", req.body.category));
+    console.log("UPDATE stock SET status='deleted' WHERE category <@ '%CATEGORY'%;".replace("%CATEGORY%", req.body.category));
     pg.connect(global.databaseURI, function(err, client, done){
-        client.query("DELETE FROM permitted_categories WHERE category <@ '%CATEGORY%';".replace(req.body.category), function(error, result){
+        client.query("DELETE FROM permitted_categories WHERE category <@ '%CATEGORY%';".replace("%CATEGORY%", req.body.category), function(error, result){
             console.log("Tried to hard-delete from permitted " + req.body.category);
         });
 
-        client.query("UPDATE stock SET status='deleted' WHERE category <@ '%CATEGORY%';".replace(req.body.category), function(error, result){
+        client.query("UPDATE stock SET status='deleted' WHERE category <@ '%CATEGORY%';".replace("%CATEGORY%", req.body.category), function(error, result){
             console.log("Tried to hard-delete from stock " + req.body.category);
         });
          res.send();
