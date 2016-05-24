@@ -37,7 +37,7 @@ router.get('/', function(req, res){
 function createQueryNormal(q){
 
     if(q){
-        var QUERY = "SELECT * FROM stock WHERE lower(label) LIKE '%_SEARCH_%' AND status='listed';".replace("_SEARCH_", q);
+        var QUERY = "SELECT * FROM stock WHERE label iLIKE '%_SEARCH_%' AND status='listed';".replace("_SEARCH_", q);
     } else {
         var QUERY = "SELECT * FROM stock WHERE status='listed';"
     }
@@ -51,7 +51,7 @@ function createQueryAdvanced(q, category, min, max, valued ){
     var QUERY = "SELECT * FROM stock";
 
     if(q){
-        QUERY = QUERY + " WHERE lower(label) LIKE '%_SEARCH_%'".replace("_SEARCH_", q);
+        QUERY = QUERY + " WHERE label iLIKE '%_SEARCH_%'".replace("_SEARCH_", q);
     }
 
     if (category){
