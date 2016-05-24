@@ -108,6 +108,7 @@ function populateUserComplaintDropdown(){
         for (valuer in data.valuersList){
             users.add(data.valuersList[valuer]);
         }
+        users.add(data.listed_by);
         console.log(users);
         var userArray = Array.from(users).sort();
 
