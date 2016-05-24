@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg').native;
 
+router.get("/:userid", function(req, res){
+
+    QUERY = "SELECT * FROM stock WHERE uid=(SELECT uid FROM users WHERE username='%NAME%') AND status='listed';".replace("%NAME%", req.params.userid);
+
+    searchDatabase(QUERY, res);
+
+});
+
 router.get('/', function(req, res){
 
     console.log("GOT TO SEARCH");
@@ -28,7 +36,7 @@ router.get('/', function(req, res){
 function createQueryNormal(q){
 
     if(q){
-        var QUERY = "SELECT * FROM stock WHERE lower(label) LIKE '%_SEARCH_%' AND status='listed';".replace("_SEARCH_", search);
+        var QUERY = "SELECT * FROM stock WHERE lower(label) LIKE '%_SEARCH_%' AND status='listed';".replace("_SEARCH_", q);
     } else {
         var QUERY = "SELECT * FROM stock WHERE status='listed';"
     }
