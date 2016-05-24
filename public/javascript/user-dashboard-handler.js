@@ -14,6 +14,9 @@ $(document).ready(function(){
 function loadPastOrders(){
     $("#dashboardData").empty();
     $.get("/transactions/" + localStorage.getItem("loggedInAs"), function(data){
+        if(data.length === 0){
+            $("#dashboardData").append("<h4>You haven't ordered anything yet<h4>");
+        }
        for (order in data){
            $("#dashboardData").append("<li class='list-group-item' id='" + data[order].tid + "'><h2>Order #" + data[order].tid + "</h2></li>");
            for (product in data[order].products){
@@ -55,6 +58,10 @@ function listItemsForSale(){
 
         $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function (data) {
 
+            if(data.length === 0){
+                $("#dashboardData").append("<h4>You don't have any current listings<h4>");
+            }
+
 
             for (element in data) {
                 var title = data[element].label;
@@ -92,7 +99,9 @@ function listItemsForSale(){
 function listSoldItems(){
     $("#dashboardData").empty();
     $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
-
+        if(data.length === 0){
+            $("#dashboardData").append("<h4>You haven't sold anything yet<h4>");
+        }
         for (element in data){
             var title = data[element].label;
             var price = data[element].price;
