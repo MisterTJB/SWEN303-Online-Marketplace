@@ -54,7 +54,9 @@ function loginSuccess(email){
     localStorage.setItem("loggedInAs", email);
     toggleLoginLogout();
     console.log("Successfully logged in");
-    window.location.replace("/");
+    if(window.location.pathname === "/" ){
+        window.location.replace("/");
+    }
 }
 
 

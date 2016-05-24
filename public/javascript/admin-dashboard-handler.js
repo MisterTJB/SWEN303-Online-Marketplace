@@ -26,10 +26,6 @@ function ltreeToJSON(input){
 }
 
 $(document).ready(function(){
-    console.log("Getting categories");
-
-
-
 });
 
 
@@ -37,14 +33,14 @@ function selectedCategoryToLTreePathRecursive(node){
     //
     // return $("#tree").treeview('getParent', node).nodes;
 
-    if (!$("#tree").treeview('getParent', node).nodes){
+    if (!$("#adminTree").treeview('getParent', node).nodes){
         return [node.text]
     }
     //else {
     //     selectedCategoryToLTreePath($("#tree").treeview('getParent', node));
     // }
     else {
-        var nodes = selectedCategoryToLTreePathRecursive($("#tree").treeview('getParent', node));
+        var nodes = selectedCategoryToLTreePathRecursive($("#adminTree").treeview('getParent', node));
         nodes.push(node.text);
         return nodes;
     }
@@ -56,16 +52,16 @@ function selectedCategoryToLTreePath(node){
 
 function displayCategoryTree(){
     $("#dashboardData").empty();
-    html = '<div id="tree"></div>' +
-        '<form>' +
-        '<a>Rename</a>' +
-        '<a>Delete</a>' +
-        '<a>Add Sibling</a>' +
-    '<a>Add Child</a>' +
-    '</form>'
+    html =
+        '<h4>Select A Category</h4>'+
+        '<div id="adminTree"></div>' +
+
+        '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Add</button>' +
+        '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeModal" data-whatever="@fat">Remove</button>'
     $("#dashboardData").append(html);
-    $.get("/categories", function(data){
-        $('#tree').treeview({
+    $.get("/categories/permitted", function(data){
+
+        $('#adminTree').treeview({
             data: ltreeToJSON(data),
             levels: 0,
             onNodeSelected: function(event, node) {
@@ -141,8 +137,46 @@ function deleteMember(cid){
 }
 
 function deleteProduct(pid, cid){
-
-
     $.post("/product/" + pid + "/delete/");
     reviewedProductComplaint(cid);
+}
+
+
+function deleteCategory(deleteListings){
+    console.log("Delete everything: " + deleteListings);
+
+    if(deleteListings){
+        $.post("/categories/delete", {category: $("#category").val()}, function(data){
+            displayCategoryTree();
+        });
+
+    } else {
+        $.post("/categories/permitted/remove", {category: $("#category").val()}, function(data){
+            displayCategoryTree();
+        });
+    }
+}
+
+function addSibling(){
+    console.log("Add sibling");
+    // new category is category.split(".").slice(0, category.split(".").length - 1).join(".") + $(#newName)
+    var category = $("#category").val();
+    var newCategory = category.split(".").slice(0, category.split(".").length -1).join(".") + "." + $("#new-category").val();
+    newCategory = newCategory.replace(/ /g, "_");
+    console.log(newCategory);
+    $.post("/categories/permitted/add", {category: newCategory}, function(data){
+        displayCategoryTree();
+        $("#new-category").val('');
+    });
+}
+
+function addChild(){
+    console.log("Add child");
+    var newCategory = $("#category").val()  + "." + $("#new-category").val().replace(/ /g, "_");
+    console.log(newCategory);
+    $.post("/categories/permitted/add", {category: newCategory}, function(data){
+        displayCategoryTree();
+        $("#new-category").val('');
+    });
+
 }

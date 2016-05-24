@@ -53,7 +53,8 @@ router.post('/', function(req, res, next) {
                 res.send(true); // The username:password IS in the DB
                 return;
             }
-        })
+        });
+        done();
     });
 
 });

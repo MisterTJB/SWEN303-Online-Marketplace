@@ -77,6 +77,19 @@ CREATE TABLE user_complaints (
     reviewed boolean DEFAULT false
 );
 
+CREATE TABLE permitted_categories(
+    cid SERIAL,
+    category ltree
+);
+
+INSERT INTO permitted_categories(category) VALUES ('Electronics.Photography.Cameras');
+INSERT INTO permitted_categories(category) VALUES ('Clothes.Headwear.Hats');
+INSERT INTO permitted_categories(category) VALUES ('Animals.Birds.Birds_of_Prey');
+INSERT INTO permitted_categories(category) VALUES ('Animals.Birds.Flightless');
+INSERT INTO permitted_categories(category) VALUES ('Games.Board_Games.Childrens');
+INSERT INTO permitted_categories(category) VALUES ('Games.Board_Games.Evil');
+INSERT INTO permitted_categories(category) VALUES ('Artefacts.Religious');
+
 --
 -- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --

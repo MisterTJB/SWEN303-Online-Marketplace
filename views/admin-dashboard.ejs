@@ -3,8 +3,7 @@
   <head>
     <title>Home</title>
     <% include ../views/templates/head %>
-    <script src="/javascript/admin-dashboard-handler.js"></script>
-  <script src="/javascript/bootstrap-treeview.js"></script>
+      <script src="/javascript/admin-dashboard-handler.js"></script>
     
   </head>
   <body>
@@ -42,14 +41,67 @@
 
 
 
-
-
-        <!-- Div for adding results before -->
-         <div class="row" id="resultDiv0">
-   	     <div class="col-lg-12">
-           </div>
-         </div>
       </div>
 </div>
+
+
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="exampleModalLabel">Add A Category</h4>
+              </div>
+              <div class="modal-body">
+                  <form>
+
+                      <div class="form-group">
+                          <label for="message-text" class="control-label">Attention</label>
+                          <p id="message-text">This will add a new category to the list of categories available when
+                          listing a new product.</p>
+                          <p>It will not affect existing listings.</p>
+                      </div>
+                      <div class="form-group">
+                          <label for="recipient-name" class="control-label">New Category Name</label>
+                          <input type="text" class="form-control" id="new-category">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" onclick="addSibling()" class="btn btn-primary" data-dismiss="modal">Add as Sibling</button>
+                  <button type="button" onclick="addChild()" class="btn btn-primary" data-dismiss="modal">Add as Child</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="exampleModalLabel">Remove A Category</h4>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="form-group">
+                          <label for="message-text" class="control-label">Attention</label>
+                          <p id="message-text">You may delete the selected category from the system altogether, or prevent
+                           new products being listed in this category.</p>
+                          <p>Beware that all descendents of the selected category will also be removed.</p>
+                          <p>Choose wisely...</p>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" onclick="deleteCategory(false)" class="btn btn-primary" data-dismiss="modal">Prevent New Listings</button>
+                  <button type="button" onclick="deleteCategory(true)" class="btn btn-danger" data-dismiss="modal">Delete From System</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
   </body>
 </html>

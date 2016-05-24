@@ -28,7 +28,7 @@ function ltreeToJSON(input){
 $(document).ready(function(){
     console.log("Getting categories");
 
-    $.get("/categories", function(data){
+    $.get("/categories/permitted", function(data){
         $('#tree').treeview({
             data: ltreeToJSON(data),
             levels: 0,
