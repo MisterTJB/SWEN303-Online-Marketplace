@@ -15,7 +15,7 @@ router.get('/', function(req, res){
                 req.query.category,
                 req.query.minPrice,
                 req.query.maxPrice,
-                !req.query.valued
+                req.query.valued
                 ),res);
     }
     else {
@@ -25,15 +25,25 @@ router.get('/', function(req, res){
 });
 
 
-function createQueryNormal(search){
-    return "SELECT * FROM Stock WHERE lower(label) LIKE '%"+ search+"%' AND status='listed';";
+function createQueryNormal(q){
+
+    if(q){
+        var QUERY = "SELECT * FROM stock WHERE lower(label) LIKE '%_SEARCH_%' AND status='listed';".replace("_SEARCH_", search);
+    } else {
+        var QUERY = "SELECT * FROM stock WHERE status='listed';"
+    }
+    return QUERY;
 }
 
-function createQueryAdvanced(search, category, min, max, valued ){
+function createQueryAdvanced(q, category, min, max, valued ){
 
 
 
-    var QUERY = "SELECT * FROM stock WHERE lower(label) LIKE '%_SEARCH_%'".replace("_SEARCH_", search);
+    var QUERY = "SELECT * FROM stock";
+
+    if(q){
+        QUERY = QUERY + " WHERE lower(label) LIKE '%_SEARCH_%'".replace("_SEARCH_", search);
+    }
 
     if (category){
         QUERY = QUERY + " AND category <@ '%CATEGORY%'".replace("%CATEGORY%", category);
@@ -44,11 +54,15 @@ function createQueryAdvanced(search, category, min, max, valued ){
     if (max){
         QUERY = QUERY + " AND price < %MAX%".replace("%MAX%", max);
     }
-    if (valued){
+    if (valued === true){
         QUERY = QUERY + " AND selling_at_list=false";
     }
 
     QUERY = QUERY + " AND status='listed';";
+
+    if(QUERY.indexOf("WHERE") === -1){
+        QUERY = QUERY.replace("AND", "WHERE");
+    }
 
     return QUERY;
 
@@ -81,10 +95,21 @@ function searchDatabase(queryString,res){
                 return;
             }
              else {
+                for (row in result.rows){
+                    result.rows[row].valued_at = mean(result.rows[row].valuations);
+                }
                 res.render('search', {rows: result.rows}); // Send the search results
                 return;
             }
         })
     });
 }
+
+function mean(list){
+    if (list.length > 0){
+        sum = list.reduce(function(a, b){return a + b;});
+        return sum/list.length;
+    }
+}
+
 module.exports = router;
