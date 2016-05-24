@@ -4,7 +4,7 @@ var pg = require('pg').native;
 
 router.get("/:userid", function(req, res){
 
-    QUERY = "SELECT * FROM stock WHERE uid=(SELECT uid FROM users WHERE username='%NAME%') AND status='listed';".replace("%NAME%", req.params.userid);
+    QUERY = "SELECT * FROM stock WHERE uid=(SELECT uid FROM users WHERE username='%NAME%') AND (status='pending' OR status='listed');".replace("%NAME%", req.params.userid);
 
     searchDatabase(QUERY, res);
 
