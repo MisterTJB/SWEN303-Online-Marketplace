@@ -22,6 +22,7 @@ router.post('/:productid', function(req, res, next) {
 
         console.log(QUERY);
         client.query(QUERY, function(error, result){
+            done();
             if (error){
                 console.log(error);
             }
