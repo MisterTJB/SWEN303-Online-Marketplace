@@ -17,8 +17,9 @@ router.post('/', function(req, res, next) {
         client.query("INSERT INTO invite_codes VALUES (uuid_generate_v4(), '%USERID%', false) RETURNING code".replace("%USERID%", userid), function(error, result){
 
             res.send(result);
-            done();
+
         });
+        done();
     });
 });
 
@@ -34,6 +35,7 @@ router.post('/:uuid', function(req, res, next) {
                 res.send({validCode: false});
             }
         });
+        done();
     });
 });
 
@@ -45,6 +47,7 @@ router.put('/:uuid', function(req, res, next) {
         client.query("UPDATE invite_codes SET used='true' WHERE code='%UUID%'".replace("%UUID%", req.params.uuid), function(error, result){
 
         });
+        done();
     });
 });
 
