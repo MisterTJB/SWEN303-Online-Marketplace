@@ -9,62 +9,25 @@
   
   <% include ../views/templates/header %>
 
-  <% for (row in rows) {%>
-    <div>
-      <%= rows[row].label %>
+
+  <div class="container" id="results">
+
+  <% for (row in rows) { %>
+
+    <div class="row row-result" id="<%= 'resultDiv' + row %>">
+      <div class="col-lg-12"><h3><a href='<%= "/product/" + rows[row].sid %>' id=result-header><%= rows[row].label %></a></h3>
+        <% if (rows[row].selling_at_list) {%>
+        <p><b>$<%= rows[row].price%></b></p>
+        <% } else  { %>
+          <h6 style="Color:white">Valued by members</h6>
+          <p style="Color:red"><b><strike>$<%= rows[row].price%></strike></b></p>
+          <p style="Color:green"><b>$<%= rows[row].valued_at%></b></p>
+        <%}%>
+
+      </div>
     </div>
   <%}%>
-
+  </div>
 
   </body>
 </html>
-
-
-<!--function showResults(rows){-->
-
-<!--// Remove the old results-->
-<!--$( ".row-result" ).remove();-->
-
-<!--var cur_id = 1;-->
-
-<!--var i;-->
-<!--for(i = 0; i < rows.length; i++){-->
-<!--var title = rows[i].label;-->
-<!--var price = rows[i].price;-->
-<!--var quantity = rows[i].quantity;-->
-<!--var description = rows[i].description;-->
-<!--var rating = 3;//TODO add to product later-->
-<!--var link =  "/product/"+rows[i].sid;//Unique identifier-->
-
-<!--var stock = "Out of Stock";-->
-<!--var style = "Color:red;"-->
-
-<!--// If in stock set color to green-->
-<!--if(quantity > 0){-->
-<!--stock = "In Stock";-->
-<!--style = "Color:green;"-->
-<!--}-->
-
-<!--var div = document.createElement("div");-->
-
-<!--var ratingHTML = '<div class="rating">';-->
-
-  <!--// for(var i = 1; i < 6; i++){-->
-  <!--//     if(i < rating){-->
-  <!--//           ratingHTML += '<span>★</span>';-->
-  <!--//     }-->
-  <!--//     else {-->
-  <!--//           ratingHTML += '<span>☆</span>';-->
-  <!--//     }-->
-  <!--// }-->
-  <!--ratingHTML +='</div>';-->
-
-<!--div.innerHTML = '<div class="row row-result" id=resultDiv'+cur_id+'><div class="col-lg-12"><h3><a href='+link+' id=result-header>'+ title+'</a></h3><h3>'+ratingHTML+'</h3><h4 style="'+style+'">'+stock+'</h4><p><b>$'+price+'</b></p><p >'+description+'</p></div></div>';-->
-
-<!--var tId = cur_id -1;-->
-
-<!--$( div ).insertBefore( $( "#resultDiv0" ) );-->
-
-<!--cur_id++;-->
-<!--}-->
-<!--}-->
