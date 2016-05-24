@@ -17,6 +17,7 @@ router.get('/', function(req, res){
 
     // Check if it should be an advanced search
     if(req.query.adv == 'true'){
+
         console.log("searching advanced");
             searchDatabase(createQueryAdvanced(
                 req.query.q,
@@ -82,6 +83,7 @@ function searchDatabase(queryString,res){
 
         // Connect to the database
         pg.connect(global.databaseURI, function(err, client, done) {
+            done();
 
         // Check whether the connection to the database was successful
         if(err){
