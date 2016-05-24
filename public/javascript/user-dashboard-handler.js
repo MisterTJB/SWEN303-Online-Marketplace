@@ -34,14 +34,10 @@ function loadPastOrders(){
 function generateInviteCode(){
 
     var userid = sessionStorage.getItem("loggedInAs");
-    $.post('/invite-code-endpoint', {userid: userid})
-        .done( function(data) {
-            $("#inviteCode").text(data.rows[0].code);
-            codeGenerated = true;
-        } )
-        .fail( function(xhr, textStatus, errorThrown) {
-            alert(errorThrown);
-        });
+    $.post('/invite-code-endpoint', {userid: userid}, function(data){
+        $("#inviteCode").text(data.rows[0].code);
+        codeGenerated = true;
+    });
 }
 
 function mean(list){
