@@ -180,3 +180,73 @@ function addChild(){
     });
 
 }
+
+function voting(){
+    $("#dashboardData").empty();
+
+    $.get("/parameters/votes-required", function(data){
+        $("#dashboardData").append("<p>The site is currently set to require %N% votes before a listing enters the marketplace</p>".replace("%N%", data.value));
+
+        var html = '<div class="col-lg-6">'+
+            '<div class="input-group">'+
+            '<input type="text" class="form-control" id="votesInput" placeholder="Set a new value">'+
+            '<span class="input-group-btn">'+
+            '<button class="btn btn-primary" type="button" onclick="updateVotes()">Update</button>'+
+        '</span>'+
+        '</div>'+
+        '</div>'
+        $("#dashboardData").append(html);
+    });
+}
+
+function valuation(){
+    $("#dashboardData").empty();
+
+    $.get("/parameters/valuations-required", function(data){
+        $("#dashboardData").append("<p>The site is currently set to require %N% valuations before a seller may sell at the valued price</p>".replace("%N%", data.value));
+        var html = '<div class="col-lg-6">'+
+            '<div class="input-group">'+
+            '<input type="text" class="form-control" id="valuationInput" onclick="updateValuation()" placeholder="Set a new value">'+
+            '<span class="input-group-btn">'+
+            '<button class="btn btn-primary" type="button">Update</button>'+
+            '</span>'+
+            '</div>'+
+            '</div>'
+        $("#dashboardData").append(html);
+    });
+}
+
+function newQueue(){
+    $("#dashboardData").empty();
+
+    $.get("/parameters/new-queue", function(data){
+        $("#dashboardData").append("<p>The site is set to allow %N% products to populate the new queue</p>".replace("%N%", data.value));
+        var html = '<div class="col-lg-6">'+
+            '<div class="input-group">'+
+            '<input type="text" class="form-control" id="valuationInput" onclick="updateNewQueue()" placeholder="Set a new value">'+
+            '<span class="input-group-btn">'+
+            '<button class="btn btn-primary" type="button">Update</button>'+
+            '</span>'+
+            '</div>'+
+            '</div>'
+        $("#dashboardData").append(html);
+    });
+}
+
+function updateVotes(){
+    var newValue = $("#votesInput").val();
+    console.log(newValue);
+    $.post("/parameters/votes-required/" + newValue, function(data){
+        voting();
+    });
+}
+
+function updateValuation(){
+    var newValue = $("#valuationInput").val();
+
+}
+
+function updateNewQueue(){
+    var newValue = $("#valuationInput").val();
+
+}
