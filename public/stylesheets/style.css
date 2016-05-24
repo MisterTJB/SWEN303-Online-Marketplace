@@ -1,7 +1,6 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+@import url(http://fonts.googleapis.com/css?family=Oswald:400|Open+Sans:700);
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
 
 a {
   color: #00B7FF;
@@ -71,4 +70,74 @@ a {
 .rating > span:hover ~ span:before {
    content: "\2605";
    position: absolute;
+}
+
+/*Header CSS*/
+
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+
+body {
+  background: #2b3e50; 
+  padding: 50px;
+  color: orange;
+}
+
+section.text {
+  width: 100%;
+  min-width: 800px;
+  text-align: center;
+  top: 10%;
+  margin-bottom: 2%;
+}
+
+.heading {
+  font-family: "Oswald", Sans-serif;
+  text-transform: uppercase;
+  font-weight: 600px;
+  font-size: 50px;
+  color:#df691a;
+  text-shadow: 4px 4px black, 6px 7px black;
+}
+
+ span {
+  display: inline-block;
+  vertical-align: middle;
+  color: #df691a;
+}
+
+span.star {
+  font-size: 20px;
+}
+
+.sub-heading{
+  font-family: "Open Sans", Sans-serif;
+  text-transform: uppercase;
+  font-weight: 700px;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;  
+  position: relative;
+}
+
+.sub-heading:before, .sub-heading:after {
+  content: " ";
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  
+  border-top: 2px solid #121212;
+  border-bottom: 2px solid #121212;
+}
+
+.sub-heading:before {
+  margin: 5px 0 0 -110px;
+}
+
+.sub-heading:after {
+  margin: 5px 0 0 10px;
 }
