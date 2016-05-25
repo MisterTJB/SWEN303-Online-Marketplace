@@ -28,6 +28,7 @@ router.get('/:productid', function(req, res, next) {
                 votes: product.votes,
                 votesRequired: votes_required,
                 price: product.price,
+                status: product.status,
                 stock: product.quantity,
                 meanValuation: mean(product.valuations),
                 valuersCount: product.valuers.length,
