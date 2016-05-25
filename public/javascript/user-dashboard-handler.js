@@ -16,7 +16,7 @@ function loadPastOrders(){
     $("#dashboardData").append("<h4>Past orders</h4>");
     $.get("/transactions/" + localStorage.getItem("loggedInAs"), function(data){
         if(data.length === 0){
-            $("#dashboardData").append("<h4>You haven't ordered anything yet<h4>");
+            $("#dashboardData").append("<h4>You haven't ordered anything yet</h4>");
         }
        for (order in data){
            $("#dashboardData").append("<li class='list-group-item' id='" + data[order].tid + "'><h2>Order #" + data[order].tid + "</h2></li>");
@@ -59,7 +59,9 @@ function listItemsForSale(){
         $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function (data) {
 
             if(data.length === 0){
-                $("#dashboardData").append("<h4>You don't have any current listings<h4>");
+                $("#dashboardData").append("<h4>You don't have any current listings</h4>");
+            } else {
+                $("#dashboardData").append("<h4>Listed Products</h4>");
             }
 
 
@@ -100,8 +102,12 @@ function listSoldItems(){
     $("#dashboardData").empty();
     $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
         if(data.length === 0){
-            $("#dashboardData").append("<h4>You haven't sold anything yet<h4>");
+            $("#dashboardData").append("<h4>You haven't sold anything yet</h4>");
+        }else {
+            $("#dashboardData").append("<h4>Sold Products</h4>");
         }
+
+
         for (element in data){
             var title = data[element].label;
             var price = data[element].price;
@@ -113,6 +119,56 @@ function listSoldItems(){
                 "<p>Listed at $" + price + "</p>" +
                 "<p>Valued at: $" + mean(valuations) +
                 "</p>" +
+                "</li>" +
+                "<hr>"
+
+            $("#dashboardData").append(html);
+        }
+    });
+
+}
+
+function listRejectedProducts(){
+
+    $("#dashboardData").append("<h4>Rejected Listings</h4>");
+    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
+
+        for (element in data){
+            var title = data[element].label;
+            var price = data[element].price;
+            var valuations = data[element].valuations;
+
+            var html = "<li class='list-group-item'>" +
+                "<h3>" + title +
+                "</h3>" +
+                "<p>Listed at $" + price + "</p>" +
+                "<p>Valued at: $" + mean(valuations) +
+                "</p>" +
+                "<p>This product did not receive sufficient votes</p>"+
+                "</li>" +
+                "<hr>"
+
+            $("#dashboardData").append(html);
+            listDeletedProducts();
+        }
+    });
+}
+
+function listDeletedProducts(){
+    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
+
+        for (element in data){
+            var title = data[element].label;
+            var price = data[element].price;
+            var valuations = data[element].valuations;
+
+            var html = "<li class='list-group-item'>" +
+                "<h3>" + title +
+                "</h3>" +
+                "<p>Listed at $" + price + "</p>" +
+                "<p>Valued at: $" + mean(valuations) +
+                "</p>" +
+                "<p>This product was deleted by an administrator</p>"+
                 "</li>" +
                 "<hr>"
 
