@@ -61,7 +61,7 @@
                         <%} else if (status === 'unsuccessful') { %>
                             <p>This listing failed to receive enough votes</p>
                         <%} else {%>
-                            <% if (votes === votesRequired && sellingAtList) {%>
+                            <% if (votes >= votesRequired && sellingAtList) {%>
                             <h4>Average valuation $<%= meanValuation %> </h4>
                             <p id="valuationText">Valued by <%= valuersCount %> members </p>
                             <div id="valuationControls">

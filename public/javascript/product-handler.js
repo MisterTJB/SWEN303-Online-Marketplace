@@ -56,7 +56,9 @@ function toggleCartButton(){
 function toggleValuation(){
     
     $.get(window.location.pathname + "/valued-by/" + localStorage.getItem("loggedInAs"), function(data){
-        if (true){
+        console.log("User has valued: " + data.userHasValued);
+        if (data.userHasValued === true){
+            console.log("Removing valuation controls");
             $("#valuationControls").remove();
             $("#valuationText").append("(including you)");
         }

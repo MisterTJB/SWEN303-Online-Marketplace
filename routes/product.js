@@ -57,9 +57,11 @@ router.get('/:productid/valued-by/:userid', function(req, res, next) {
             done();
             var valuers = result.rows[0].valuers;
             if (valuers.indexOf(req.params.userid) === -1){
-                res.send(false);
+                console.log(req.params.userid + " not in " + result.rows[0].valuers);
+                res.send({userHasValued: false});
             } else {
-                res.send(true);
+                console.log(req.params.userid + " is in " + result.rows[0].valuers);
+                res.send({userHasValued: true});
             }
 
         });
