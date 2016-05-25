@@ -42,6 +42,32 @@ router.get('/:productid', function(req, res, next) {
     });
 });
 
+router.get('/:productid/valued-by/:userid', function(req, res, next) {
+
+    pg.connect(global.databaseURI, function(err, client, done) {
+        if(err){
+            console.error('Could not connect to the database');
+            console.error(err);
+            return;
+        }
+
+
+        console.log("SELECT valuers FROM stock WHERE sid=%PRODUCTID%;".replace("%PRODUCTID%", req.params.productid));
+        client.query("SELECT valuers FROM stock WHERE sid=%PRODUCTID%;".replace("%PRODUCTID%", req.params.productid), function(error, result){
+            done();
+            var valuers = result.rows[0].valuers;
+            if (valuers.indexOf(req.params.userid) === -1){
+                res.send(false);
+            } else {
+                res.send(true);
+            }
+
+        });
+        done();
+
+    });
+});
+
 router.get('/:productid/raw', function(req, res, next) {
 
     pg.connect(global.databaseURI, function(err, client, done) {

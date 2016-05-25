@@ -37,6 +37,8 @@ $(document).ready(function(){
     populateUserComplaintDropdown();
 
     toggleCartButton();
+    
+    toggleValuation();
 
 });
 
@@ -49,6 +51,16 @@ function toggleCartButton(){
         $("#addToCart").show();
         $("#removeFromCart").hide();
     }
+}
+
+function toggleValuation(){
+    
+    $.get(window.location.pathname + "/valued-by/" + localStorage.getItem("loggedInAs"), function(data){
+        if (true){
+            $("#valuationControls").remove();
+            $("#valuationText").append("(including you)");
+        }
+    });
 }
 
 function productIsInCart(){

@@ -59,9 +59,11 @@
                         <%} else {%>
                             <% if (votes === votesRequired && sellingAtList) {%>
                             <h4>Average valuation $<%= meanValuation %> </h4>
-                            <p>Valued by <%= valuersCount %> members</p>
-                            <input placeholder="$0.00" id="valuationInput" \><br><br>
-                            <a class="btn btn-info" id="valuationButton">Submit my valuation</a>
+                            <p id="valuationText">Valued by <%= valuersCount %> members </p>
+                            <div id="valuationControls">
+                                <input placeholder="$0.00" id="valuationInput" \><br><br>
+                                <a class="btn btn-info" id="valuationButton">Submit my valuation</a>
+                            </div>
                             <hr>
 
                             <%} %>
@@ -69,7 +71,8 @@
                             <% if (sellingAtList) {%>
                                 <h3 style="">Asking Price $<%= price %></h3>
                             <% } else {%>
-                                <h3 style="">Valuation Price $<%= meanValuation %></h3>
+                                <h3 style="Color:red"><strike>Asking Price $<%= price %></strike></h3>
+                                <h3 style="Color:green">Valuation Price $<%= meanValuation %></h3>
                                 <p>Based on valuations by <%= valuersCount %> other members</p>
                             <%}%>
 
