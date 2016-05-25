@@ -56,6 +56,10 @@
                         <hr>
                         <% if (status === 'sold') {%>
                             <h1>SOLD</h1>
+                        <%} else if (status === 'deleted') {%>
+                            <p>This listing was removed by an administrator in response to member complaints</p>
+                        <%} else if (status === 'unsuccessful') { %>
+                            <p>This listing failed to receive enough votes</p>
                         <%} else {%>
                             <% if (votes === votesRequired && sellingAtList) {%>
                             <h4>Average valuation $<%= meanValuation %> </h4>
