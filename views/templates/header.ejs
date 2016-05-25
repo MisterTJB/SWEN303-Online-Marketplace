@@ -15,23 +15,21 @@
               <a href="/">Home</a>
             </li>
 
-            <li>
-              <a href="">Help</a>
-            </li>
-
-              <li>
-                  <a id="newListings" href="/new">New Listings</a>
-              </li>
-
               <li>
                   <a id="administrate" href="/admin">Administrate</a>
               </li>
 
+
+
+
           </ul>
             
           <ul class="nav navbar-nav navbar-right" id="cssmenu">
+              <li><a id="cartButton" href="/cart">Cart &nbsp;<span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+              <li ><a id="accountButton" href="/account">My account &nbsp;</a></li>
             <li id="logoutLink">
-              <a class="btn btn-link" onclick="logout()">Logout</a>
+
+              <a onclick="logout()">Logout</a>
 
             </li>
             <li class="dropdown dropdown-large" id="menuBarLogin">
@@ -83,15 +81,12 @@
                       </div>
                       <button type="button" class="btn btn-default" onclick="search()">Search</button>
                     </form>
+                        <li>
+                            <a class="nav navbar-right" id="newListings" href="/new">New Listings</a>
+                        </li>
                       
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                      <li class="search-link"><a id="cartButton" href="/cart">Cart &nbsp;<span class="glyphicon glyphicon-shopping-cart"></span>
-                      </a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                      <li class="search-link"><a id="accountButton" href="/account">My account &nbsp;</a></li>
-                    </ul>
+
                   </div>
                 </div>
               </nav>
