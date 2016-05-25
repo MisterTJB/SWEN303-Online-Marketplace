@@ -15,7 +15,7 @@ router.post('/:productid', function(req, res, next) {
             return;
         }
 
-        var QUERY = "UPDATE stock SET valuations=array_append(valuations, cast(%VALUE% AS numeric(10,4))), valuers=array_append(valuers, '%VALUER%') WHERE sid=%STOCKID%;";
+        var QUERY = "UPDATE stock SET valuations=array_append(valuations, cast(%VALUE% AS numeric(10,2))), valuers=array_append(valuers, '%VALUER%') WHERE sid=%STOCKID%;";
         QUERY = QUERY.replace("%VALUE%", valuation);
         QUERY = QUERY.replace("%VALUER%", user);
         QUERY = QUERY.replace("%STOCKID%", productID);

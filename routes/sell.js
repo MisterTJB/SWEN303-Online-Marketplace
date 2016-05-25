@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
     // Prepare the SQL query using string interpolation to populate username and password
     QUERY = "INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) " +
         "VALUES ((SELECT uid FROM users WHERE username='%USERNAME%'), '%TITLE%', '%DESCRIPTION%', %PRICE%, %QUANTITY%, " +
-        "'%CATEGORY%', 'pending', 0, ARRAY['%USERNAME%'], true, ARRAY[]::numeric(10,4)[], ARRAY[]::text[]) RETURNING sid;"
+        "'%CATEGORY%', 'pending', 0, ARRAY['%USERNAME%'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]) RETURNING sid;"
     QUERY = QUERY.replace(/%USERNAME%/g, USERNAME);
     QUERY = QUERY.replace("%TITLE%", TITLE);
     QUERY = QUERY.replace("%DESCRIPTION%", DESCRIPTION);
