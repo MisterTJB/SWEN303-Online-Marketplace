@@ -23,8 +23,7 @@ router.get('/valuations-required', function(req, res, next) {
             console.log(result);
             done();
         });
-
-
+        done();
     });
 });
 
@@ -41,13 +40,15 @@ router.get('/votes-required', function(req, res, next) {
 
         console.log(QUERY);
         client.query(QUERY, function(error, result){
+            done();
             if (error){
                 console.log(error);
             }
             res.send(result.rows[0]);
             console.log(result);
-            done();
+
         });
+        done();
 
 
     });
@@ -131,6 +132,7 @@ router.post('/votes-required/:newValue', function(req, res, next) {
 router.post('/queue-length/:newValue', function(req, res, next) {
 
     var newProductQueueLength = parseInt(req.params.newValue);
+    console.log("ATTEMPTING TO ALTER NEW QUEUE LENGTH");
 
     pg.connect(global.databaseURI, function(err, client, done) {
         if(err){
@@ -143,10 +145,11 @@ router.post('/queue-length/:newValue', function(req, res, next) {
 
         console.log(QUERY);
         client.query(QUERY, function(error, result){
+            done();
             if (error){
                 console.log(error);
             }
-            done();
+
         });
 
 

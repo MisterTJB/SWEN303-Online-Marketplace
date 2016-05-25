@@ -73,7 +73,7 @@ function displayCategoryTree(){
 function displayProductComplaints(){
     $("#dashboardData").empty();
 
-    var html = "";
+    var html = "<h4>Complaints About Products</h4>";
     $.get("/complaints/product", function(data){
         for (complaint in data){
 
@@ -97,7 +97,7 @@ function displayProductComplaints(){
 function displayMemberComplaints(){
     $("#dashboardData").empty();
 
-    var html = "";
+    var html = "<h4>Complaints About Members</h4>";
     $.get("/complaints/user", function(data){
         for (complaint in data){
 
@@ -185,7 +185,7 @@ function voting(){
     $("#dashboardData").empty();
 
     $.get("/parameters/votes-required", function(data){
-        $("#dashboardData").append("<p>The site is currently set to require %N% votes before a listing enters the marketplace</p>".replace("%N%", data.value));
+        $("#dashboardData").append("<h4>Set Votes Required</h4><p>The site is currently set to require %N% votes before a listing enters the marketplace</p>".replace("%N%", data.value));
 
         var html = '<div class="col-lg-6">'+
             '<div class="input-group">'+
@@ -203,12 +203,12 @@ function valuation(){
     $("#dashboardData").empty();
 
     $.get("/parameters/valuations-required", function(data){
-        $("#dashboardData").append("<p>The site is currently set to require %N% valuations before a seller may sell at the valued price</p>".replace("%N%", data.value));
+        $("#dashboardData").append("<h4>Set Valuations Required</h4><p>The site is currently set to require %N% valuations before a seller may sell at the valued price</p>".replace("%N%", data.value));
         var html = '<div class="col-lg-6">'+
             '<div class="input-group">'+
-            '<input type="text" class="form-control" id="valuationInput" onclick="updateValuation()" placeholder="Set a new value">'+
+            '<input type="text" class="form-control" id="valuationInput"  placeholder="Set a new value">'+
             '<span class="input-group-btn">'+
-            '<button class="btn btn-primary" type="button">Update</button>'+
+            '<button class="btn btn-primary" onclick="updateValuation()" type="button">Update</button>'+
             '</span>'+
             '</div>'+
             '</div>'
@@ -219,13 +219,13 @@ function valuation(){
 function newQueue(){
     $("#dashboardData").empty();
 
-    $.get("/parameters/new-queue", function(data){
-        $("#dashboardData").append("<p>The site is set to allow %N% products to populate the new queue</p>".replace("%N%", data.value));
+    $.get("/parameters/queue-length", function(data){
+        $("#dashboardData").append("<h4>Set New Queue Length</h4><p>The site is set to purge the oldest product from the <a href='/new'>new listings</a> queue whenever it contains %N% products</p>".replace("%N%", data.value));
         var html = '<div class="col-lg-6">'+
             '<div class="input-group">'+
-            '<input type="text" class="form-control" id="valuationInput" onclick="updateNewQueue()" placeholder="Set a new value">'+
+            '<input type="text" class="form-control" id="newQueueInput" placeholder="Set a new value">'+
             '<span class="input-group-btn">'+
-            '<button class="btn btn-primary" type="button">Update</button>'+
+            '<button class="btn btn-primary" type="button" onclick="updateNewQueue()">Update</button>'+
             '</span>'+
             '</div>'+
             '</div>'
@@ -236,17 +236,21 @@ function newQueue(){
 function updateVotes(){
     var newValue = $("#votesInput").val();
     console.log(newValue);
-    $.post("/parameters/votes-required/" + newValue, function(data){
-        voting();
-    });
+    $.post("/parameters/votes-required/" + newValue);
+    voting();
 }
 
 function updateValuation(){
     var newValue = $("#valuationInput").val();
+    console.log(newValue);
+    $.post("/parameters/valuations-required/" + newValue);
+    valuation();
 
 }
 
 function updateNewQueue(){
-    var newValue = $("#valuationInput").val();
-
+    var newValue = $("#newQueueInput").val();
+    console.log(newValue);
+    $.post("/parameters/queue-length/" + newValue);
+    newQueue();
 }
