@@ -51,10 +51,12 @@ router.post('/', function(req, res, next) {
 
         // Get the max number of products allowed in the new queue
         client.query("SELECT value FROM site_parameters WHERE parameter='PRODUCTS_IN_QUEUE'", function(err, result){
+          done();
           var max_queue = result.rows[0].value;
           console.log("Max queue: " + max_queue);
 
           client.query("SELECT count(*), min(sid) FROM stock WHERE status='pending'", function(err, result){
+            done();
             console.log(result.rows[0]);
             var queue_length = result.rows[0]['count'];
             var oldest_product = result.rows[0]['min'];
@@ -64,6 +66,7 @@ router.post('/', function(req, res, next) {
             console.log("Oldest product: " + oldest_product);
             if (queue_length > max_queue){
               client.query("UPDATE stock SET status='unsuccessful' WHERE sid='%SID%'".replace("%SID%", oldest_product), function(err, result){
+                done();
                 console.log("Removed " + oldest_product);
               });
             }

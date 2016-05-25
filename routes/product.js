@@ -52,10 +52,12 @@ router.get('/:productid/raw', function(req, res, next) {
 
         var votes_required;
         client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
+            done();
             votes_required = result.rows[0].value;
         });
 
         client.query("SELECT * FROM stock where sid='%PRODUCTID%';".replace("%PRODUCTID%", req.params.productid), function(error, result){
+            done();
             product = result.rows[0];
             res.send({
                 title: product.label,
@@ -100,32 +102,37 @@ router.post('/:productid', function(req, res, next) {
 
         var votes_required;
         client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
+            done();
             console.log(result);
             votes_required = result.rows[0].value;
-        });
 
-        var QUERY = "UPDATE stock SET votes=votes%VOTE_OPERATOR%, voters=array_append(voters, '%USERID%') WHERE sid=%STOCKID% RETURNING votes;"
-        QUERY = QUERY.replace("%USERID%", user);
-        QUERY = QUERY.replace("%STOCKID%", productID);
-        if (voteup){
-            QUERY = QUERY.replace("%VOTE_OPERATOR%", "+1");
-        } else {
-            QUERY = QUERY.replace("%VOTE_OPERATOR%", "-1");
-        }
+            var QUERY = "UPDATE stock SET votes=votes%VOTE_OPERATOR%, voters=array_append(voters, '%USERID%') WHERE sid=%STOCKID% RETURNING votes;"
+            QUERY = QUERY.replace("%USERID%", user);
+            QUERY = QUERY.replace("%STOCKID%", productID);
+            if (voteup){
+                QUERY = QUERY.replace("%VOTE_OPERATOR%", "+1");
+            } else {
+                QUERY = QUERY.replace("%VOTE_OPERATOR%", "-1");
+            }
 
-        var votes_received;
-        client.query(QUERY, function(err, result){
-            console.log(result);
-            votes_received = result.rows[0].votes;
-        });
-
-        if (votes_required === votes_received){
-            QUERY = "UPDATE stock SET status='listed' WHERE sid=%STOCKID%;".replace("%STOCKID%", productID);
+            var votes_received;
             client.query(QUERY, function(err, result){
-                console.log(QUERY);
+                done();
+                console.log(result);
+                votes_received = result.rows[0].votes;
+
+
+                if (votes_required === votes_received){
+                    console.log("votes_required: " + votes_required + "\nvotes_received: " + votes_received);
+                    QUERY = "UPDATE stock SET status='listed' WHERE sid=%STOCKID%;".replace("%STOCKID%", productID);
+                    client.query(QUERY, function(err, result){
+                        done();
+                        console.log(QUERY);
+                    });
+                }
             });
-        }
-        done();
+        });
+
         res.send();
 
     });
@@ -149,9 +156,10 @@ router.post('/:productid/sold', function(req, res, next) {
         }
 
         client.query(QUERY, function(error, result){
+            done();
             console.log(result);
         });
-        done();
+
     });
 });
 
@@ -174,6 +182,7 @@ router.post('/:productid/setvaluation', function(req, res, next) {
 
         client.query(QUERY, function(error, result){
             console.log(result);
+            res.send();
             done();
         });
         done();

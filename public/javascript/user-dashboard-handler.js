@@ -50,51 +50,85 @@ function mean(list){
 }
 
 function listItemsForSale(){
+    console.log("LISTING ITEMS FOR SALE");
     $("#dashboardData").empty();
 
     var valuationsRequired;
+    var votesRequired;
     $.get("/parameters/valuations-required", function(valuationData) {
         valuationsRequired = valuationData.value;
 
-        $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function (data) {
 
-            if(data.length === 0){
-                $("#dashboardData").append("<h4>You don't have any current listings</h4>");
-            } else {
-                $("#dashboardData").append("<h4>Listed Products</h4>");
-            }
+        $.get("/parameters/votes-required", function(voteData) {
+            votesRequired = voteData.value;
 
+            $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/forsale", function (data) {
 
-            for (element in data) {
-                var title = data[element].label;
-                var id = data[element].sid;
-                var price = data[element].price;
-                var valuations = data[element].valuations;
-                var totalValuations = valuations.length;
-
-                var html = "<li class='list-group-item'>" +
-                    "<h3><a href='/product/%HREF%'>".replace("%HREF%", id) + title +
-                    "</h3></a>" +
-                    "<p>Listed at $" + price + "</p>" +
-                    "<p>Valued at: $" + mean(valuations) +
-                    "</p>" +
-                    "%VALUATION%" +
-                    "<br>" +
-                    "</li>" +
-                    "<hr>"
-
-                console.log(totalValuations);
-                console.log(valuationsRequired);
-                if (totalValuations >= valuationsRequired){
-                    html = html.replace("%VALUATION%", "<a id='valuation' onclick='sellForValuation(%ID%)'>Sell For Valuation</a>".replace("%ID%", id));
+                if(data.length === 0){
+                    $("#dashboardData").append("<h4>You don't have any current listings</h4>");
                 } else {
-                    html = html.replace("%VALUATION%", "<p>Requires %N% more valuations before the community price can be selected</p>".replace("%N%", valuationsRequired-totalValuations));
+                    $("#dashboardData").append("<h4>Listed Products</h4>");
                 }
 
-                $("#dashboardData").append(html);
-            }
-        });
 
+                for (element in data) {
+                    var title = data[element].label;
+                    var id = data[element].sid;
+                    var price = data[element].price;
+                    var valuations = data[element].valuations;
+                    var totalValuations = valuations.length;
+                    var sellingAtList = data[element].selling_at_list;
+                    var status = data[element].status;
+                    var votes = data[element].votes;
+                    console.log(sellingAtList);
+
+                    var html = "<li class='list-group-item'>" +
+                        "<h3><a href='/product/%HREF%'>".replace("%HREF%", id) + title +
+                        "</h3></a>" +
+                        "<h4>Listed at $" + price + "</h4>" +
+                        "<p>Valued at: $" + mean(valuations) +
+                        " (based on valuations provided by %N% other members)</p>".replace("%N%", totalValuations) +
+                        "%VALUATION%" +
+                        "<br>" +
+                        "</li>" +
+                        "<hr>"
+
+                    console.log(totalValuations);
+                    console.log(valuationsRequired);
+                    if (totalValuations >= valuationsRequired){
+                        html = html.replace("%VALUATION%", "<a class='btn btn-primary' id='valuation' onclick='sellForValuation(%ID%)'>Sell For Valuation</a>".replace("%ID%", id));
+                    } else {
+                        html = html.replace("%VALUATION%", "<p><i>Requires %N% more valuations before the community price can be selected</i></p>".replace("%N%", valuationsRequired-totalValuations));
+                    }
+
+                    if (!sellingAtList){
+                         html = "<li class='list-group-item'>" +
+                            "<h3><a href='/product/%HREF%'>".replace("%HREF%", id) + title +
+                            "</h3></a>" +
+                            "<p><strike>Listed at $" + price + "</strike></p>" +
+                            "<h4 style='Color:green'>Valued at: $" + mean(valuations) +
+                            "</h4>" +
+                                 "<p><i>Selling at the mean valuation price based on valuations submitted by %N% members</i></p>".replace("%N%", totalValuations)+
+                            "<br>" +
+                            "</li>" +
+                            "<hr>"
+                    }
+
+                    if (status === 'pending'){
+                        html = "<li class='list-group-item'>" +
+                            "<h3><a href='/product/%HREF%'>".replace("%HREF%", id) + title +
+                            "</h3></a>" +
+                            "<h4>Listed at $" + price + "</h4>" +
+                            "<p><i>Requires %N% more votes</p></i></p>".replace("%N%", votesRequired-votes)+
+                            "<br>" +
+                            "</li>" +
+                            "<hr>"
+                    }
+
+                    $("#dashboardData").append(html);
+                }
+            });
+        });
     });
 }
 
@@ -110,17 +144,25 @@ function listSoldItems(){
 
         for (element in data){
             var title = data[element].label;
+            var id = data[element].sid;
             var price = data[element].price;
             var valuations = data[element].valuations;
+            var list = data[element].selling_at_list;
 
-            var html = "<li class='list-group-item'>" +
-                "<h3>" + title +
-                "</h3>" +
-                "<p>Listed at $" + price + "</p>" +
-                "<p>Valued at: $" + mean(valuations) +
-                "</p>" +
-                "</li>" +
-                "<hr>"
+
+
+            if (list){
+                var html = "<li class='list-group-item'>" +
+                    "<h3><a href='%HREF%'>".replace("%HREF%", "/product/" + id) + title + "</a></h3>" +
+                    "<h4>Sold for $" + price + "</h4>" +
+                    "<p>This product sold at its listed price</p>" +
+                    "<br>" +
+                    "</li>"+
+                    "<hr>"
+
+            }
+
+
 
             $("#dashboardData").append(html);
         }
@@ -129,6 +171,7 @@ function listSoldItems(){
 }
 
 function listRejectedProducts(){
+    $("dashboardData").empty();
 
     $("#dashboardData").append("<h4>Rejected Listings</h4>");
     $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
@@ -180,6 +223,7 @@ function listDeletedProducts(){
 
 function sellForValuation(productID){
     $.post("/product/" + productID + "/setvaluation", function(data){
-        $("#valuation").prop('disabled', true);
+        console.log("UPDATED SELL FOR VALUATION");
+        listItemsForSale();
     });
 }
