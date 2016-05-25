@@ -171,42 +171,43 @@ function listSoldItems(){
 }
 
 function listRejectedProducts(){
-    $("dashboardData").empty();
+    $("#dashboardData").empty();
 
     $("#dashboardData").append("<h4>Rejected Listings</h4>");
-    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
+    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/unsuccessful", function(data){
 
         for (element in data){
             var title = data[element].label;
+            var id = data[element].sid;
             var price = data[element].price;
             var valuations = data[element].valuations;
 
             var html = "<li class='list-group-item'>" +
-                "<h3>" + title +
-                "</h3>" +
+                "<h3><a href='%HREF%'>".replace("%HREF%", "/product/" + id) + title + "</a></h3>" +
                 "<p>Listed at $" + price + "</p>" +
-                "<p>Valued at: $" + mean(valuations) +
                 "</p>" +
                 "<p>This product did not receive sufficient votes</p>"+
                 "</li>" +
                 "<hr>"
 
             $("#dashboardData").append(html);
-            listDeletedProducts();
+
         }
+        listDeletedProducts();
     });
 }
 
 function listDeletedProducts(){
-    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/sold", function(data){
+    $.get("/users-endpoint/" + localStorage.getItem("loggedInAs") + "/deleted", function(data){
 
         for (element in data){
             var title = data[element].label;
             var price = data[element].price;
+            var id = data[element].sid;
             var valuations = data[element].valuations;
 
             var html = "<li class='list-group-item'>" +
-                "<h3>" + title +
+                "<h3><a href='%HREF%'>".replace("%HREF%", "/product/" + id) + title + "</a></h3>" +
                 "</h3>" +
                 "<p>Listed at $" + price + "</p>" +
                 "<p>Valued at: $" + mean(valuations) +
