@@ -79,7 +79,7 @@ function listItemsForSale(){
                     "<p>Valued at: $" + mean(valuations) +
                     "</p>" +
                     "%VALUATION%" +
-                    "<br><a>Delete</a>" +
+                    "<br>" +
                     "</li>" +
                     "<hr>"
 
