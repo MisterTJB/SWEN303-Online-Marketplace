@@ -15,11 +15,10 @@ router.post('/', function(req, res, next) {
     console.log("%USER% is trying to create code".replace("%USER%", userid));
     pg.connect(global.databaseURI, function(err, client, done){
         client.query("INSERT INTO invite_codes VALUES (uuid_generate_v4(), '%USERID%', false) RETURNING code".replace("%USERID%", userid), function(error, result){
-
+            done();
             res.send(result);
 
         });
-        done();
     });
 });
 
@@ -29,13 +28,13 @@ router.post('/', function(req, res, next) {
 router.post('/:uuid', function(req, res, next) {
     pg.connect(global.databaseURI, function(err, client, done){
         client.query("SELECT * FROM invite_codes WHERE code='%UUID%'".replace("%UUID%", req.params.uuid), function(error, result){
+            done();
             if (result.rowCount === 1){
                 res.send({validCode: true, used: result.rows[0].used});
             } else {
                 res.send({validCode: false});
             }
         });
-        done();
     });
 });
 
@@ -45,9 +44,8 @@ router.post('/:uuid', function(req, res, next) {
 router.put('/:uuid', function(req, res, next) {
     pg.connect(global.databaseURI, function(err, client, done){
         client.query("UPDATE invite_codes SET used='true' WHERE code='%UUID%'".replace("%UUID%", req.params.uuid), function(error, result){
-
+            done();
         });
-        done();
     });
 });
 

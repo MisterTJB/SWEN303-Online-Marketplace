@@ -14,11 +14,13 @@ router.get('/:productid', function(req, res, next) {
 
         var votes_required;
         client.query("SELECT value FROM site_parameters WHERE parameter='VOTES_REQUIRED'", function(error, result){
+            done();
             votes_required = result.rows[0].value;
         });
 
         console.log("SELECT * FROM (stock JOIN users ON stock.uid=users.uid) WHERE sid=%PRODUCTID%;".replace("%PRODUCTID%", req.params.productid));
         client.query("SELECT * FROM (stock JOIN users ON stock.uid=users.uid) WHERE sid=%PRODUCTID%;".replace("%PRODUCTID%", req.params.productid), function(error, result){
+            done();
             product = result.rows[0];
             res.render("product", {
                 title: product.label,
@@ -37,7 +39,7 @@ router.get('/:productid', function(req, res, next) {
                 categories: []});
 
         });
-        done();
+
 
     });
 });
@@ -65,7 +67,6 @@ router.get('/:productid/valued-by/:userid', function(req, res, next) {
             }
 
         });
-        done();
 
     });
 });
@@ -210,11 +211,10 @@ router.post('/:productid/setvaluation', function(req, res, next) {
         }
 
         client.query(QUERY, function(error, result){
+            done();
             console.log(result);
             res.send();
-            done();
         });
-        done();
 
     });
 });

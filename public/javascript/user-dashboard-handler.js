@@ -160,6 +160,14 @@ function listSoldItems(){
                     "</li>"+
                     "<hr>"
 
+            } else {
+                var html = "<li class='list-group-item'>" +
+                    "<h3><a href='%HREF%'>".replace("%HREF%", "/product/" + id) + title + "</a></h3>" +
+                    "<h4>Sold for $" + price + "</h4>" +
+                    "<p>This product sold at its valued price</p>" +
+                    "<br>" +
+                    "</li>"+
+                    "<hr>"
             }
 
 

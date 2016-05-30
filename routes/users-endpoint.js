@@ -34,6 +34,7 @@ router.get('/', function(req, res, next) {
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
         client.query(QUERYSTRING, function(error, result){
+            done();
 
             console.log(result);
             console.log(error);
@@ -75,7 +76,7 @@ router.get('/:name/forsale', function(req, res, next) {
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
         client.query(QUERYSTRING, function(error, result){
-
+            done();
             console.log(result);
             console.log(error);
             if(error) {
@@ -110,7 +111,7 @@ router.get('/:name/sold', function(req, res, next) {
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
         client.query(QUERYSTRING, function(error, result){
-
+            done();
             console.log(result);
             console.log(error);
             if(error) {

@@ -38,6 +38,7 @@ router.post('/', function(req, res, next) {
         // Execute the query -- an empty result indicates that the username:password pair does
         // not exist in the database
         client.query(QUERYSTRING, function(error, result){
+            done();
 
             console.log(result);
             console.log(error);
@@ -46,7 +47,7 @@ router.post('/', function(req, res, next) {
                 console.error(error);
                 return;
             }
-            else if (result.rowCount === 0){
+            else if (result.rowCount === undefined || result.rowCount === 0){
                 res.send(false); // The username:password is NOT in the DB
                 return;
             } else {
@@ -54,7 +55,6 @@ router.post('/', function(req, res, next) {
                 return;
             }
         });
-        done();
     });
 
 });

@@ -15,6 +15,7 @@ router.get('/permitted', function(req, res, next) {
 
     pg.connect(global.databaseURI, function(err, client, done){
         client.query("SELECT category FROM permitted_categories;", function(error, result){
+            done();
             var resultSet = new Set();
             for (categoryDictionary in result.rows){
                 var path = result.rows[categoryDictionary]['category'];
@@ -34,11 +35,12 @@ router.post('/permitted/remove', function(req, res, next) {
 
     console.log("DELETE FROM permitted_categories WHERE category <@ '%CATEGORY%';".replace("%CATEGORY%", req.body.category));
     pg.connect(global.databaseURI, function(err, client, done){
+        done();
         client.query("DELETE FROM permitted_categories WHERE category <@ '%CATEGORY%';".replace("%CATEGORY%", req.body.category), function(error, result){
             console.log("Tried to soft-delete " + req.body.category);
         });
         res.send();
-        done();
+
     });
 
 
@@ -51,11 +53,14 @@ router.post('/permitted/add', function(req, res, next) {
 
     console.log("INSERT INTO permitted_categories(category) VALUES ('%CATEGORY%');".replace("%CATEGORY%", req.body.category));
     pg.connect(global.databaseURI, function(err, client, done){
+
         client.query("INSERT INTO permitted_categories(category) VALUES ('%CATEGORY%');".replace("%CATEGORY%", req.body.category), function(error, result){
             console.log("Tried to insert " + req.body.category);
+            done();
+            res.send();
         });
-        res.send();
-        done();
+
+
     });
 });
 
@@ -88,6 +93,7 @@ router.get('/', function(req, res, next) {
 
     pg.connect(global.databaseURI, function(err, client, done){
         client.query("SELECT category FROM stock", function(error, result){
+            done();
             var resultSet = new Set();
             for (categoryDictionary in result.rows){
                 var path = result.rows[categoryDictionary]['category'];
@@ -95,7 +101,6 @@ router.get('/', function(req, res, next) {
             }
             res.send(Array.from(resultSet).sort());
         });
-        done();
     });
 
 });
