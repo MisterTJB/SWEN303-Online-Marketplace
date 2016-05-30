@@ -91,7 +91,7 @@ INSERT INTO permitted_categories(category) VALUES ('Games.Board_Games.Evil');
 INSERT INTO permitted_categories(category) VALUES ('Artefacts.Religious');
 
 --
--- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: stock; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 CREATE TYPE listing_status AS ENUM ('pending', 'unsuccessful', 'listed', 'sold', 'deleted');
 CREATE TABLE stock (
@@ -116,7 +116,8 @@ CREATE TABLE site_parameters (
 );
 
 INSERT INTO site_parameters VALUES ('PRODUCTS_IN_QUEUE', 10);
-INSERT INTO site_parameters VALUES ('VOTES_REQUIRED', 10);
+INSERT INTO site_parameters VALUES ('VOTES_REQUIRED', 3);
+INSERT INTO site_parameters VALUES ('VALUATIONS_REQUIRED', 3);
 INSERT INTO site_parameters VALUES ('COMPLAINTS_REQUIRED', 5);
 INSERT INTO site_parameters VALUES ('VALUATIONS_REQUIRED', 5);
 
@@ -141,7 +142,7 @@ ALTER SEQUENCE stock_sid_seq OWNED BY stock.sid;
 
 
 --
--- Name: transactions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: transactions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE transactions (
@@ -171,7 +172,7 @@ ALTER SEQUENCE transactions_tid_seq OWNED BY transactions.tid;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE users (
@@ -238,23 +239,24 @@ ALTER TABLE ONLY users ALTER COLUMN uid SET DEFAULT nextval('users_uid_seq'::reg
 --
 
 INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (1,'Camera','Description', 12.90,3,'Electronics.Photography.Cameras', 'pending', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
-INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (1,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful', 2, ARRAY['admin', 'j0nny'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (2,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'unsuccessful');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'pending');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (3,	'Snakes and Ladders','Description',	1.0000,	1,   'Games.Board_Games.Childrens', 'pending');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (3,	'Monopoly',	'Description', 3.00,	1,   'Games.Board_Games.Evil', 'pending');
-INSERT INTO stock(uid, label, description, price, quantity, category, status) VALUES (4,	'Holy Grail',	'Description',0.99,	1,   'Artefacts.Religious', 'pending');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Meaning of Life',	'Description',42.00,	20,  'Truths.Existential', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Cactus',	'Description',9.99,	3,   'Plants.Succulent.Evil.Prickly', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (5,	'Iris',	'Description',9.99,	15,  'Plants.Perennial', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (6,	'Knives',	'Description',15.50,	4,   'Homeware.Kitchen.Preparation.Sharp', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (6,	'Sword',	'Description',49.97,	8,  'Weaponry.Sharp', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (7,	'Kryptonite',	'Description',0.50,	100, 'Weaponry.Superhero_Specific.Superman', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (7,	'S Clothing Patch',	'Description',5.99,	1000,    'Clothes.Patches', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (8,	'Table',	'Description',10.00,	1,   'Homeware.Office.Tables', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (9,	'Small Chair',	'Description',5.00,	1,   'Homeware.Office.Chairs', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (10,'Coffee', 'Description',4.99,	10,  'Drugs.Stimulants.Caffeine', 'listed');
---INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (10,'Muffin', 'Description',3.50,	10,  'Food.Baking', 'listed');
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (3,	'Hat','Description',	30.00, 1,   'Clothes.Headwear.Hats', 'unsuccessful', 2, ARRAY['admin', 'j0nny'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (9,	'Bald Eagle','Description',	999.99,	10,  'Animals.Birds.Birds_of_Prey', 'pending', 2, ARRAY['admin', 'j0nny'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (2,	'Kiwi', 'Description', 49999.99,	3,   'Animals.Birds.Flightless', 'sold', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (2,	'Snakes and Ladders','Description',	1.0000,	1,   'Games.Board_Games.Childrens', 'sold', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (3,	'Monopoly',	'Description', 3.00,	1,   'Games.Board_Games.Evil', 'sold', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[]::numeric(10,2)[], ARRAY[]::text[]);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (3,	'Holy Grail',	'Description',0.99,	1,   'Artefacts.Religious', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[1.00, 3.00], ARRAY['admin', 'j0nny']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (5,	'Meaning of Life',	'Description',42.00,	20,  'Truths.Existential', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (5,	'Cactus',	'Description',9.99,	3,   'Plants.Succulent.Evil.Prickly', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (5,	'Iris',	'Description',9.99,	15,  'Plants.Perennial', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (6,	'Knives',	'Description',15.50,	4,   'Homeware.Kitchen.Preparation.Sharp', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (6,	'Sword',	'Description',49.97,	8,  'Weaponry.Sharp', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (7,	'Kryptonite',	'Description',0.50,	100, 'Weaponry.Superhero_Specific.Superman', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (7,	'S Clothing Patch',	'Description',5.99,	1000,    'Clothes.Patches', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters, selling_at_list, valuations, valuers) VALUES (8,	'Table',	'Description',10.00,	1,   'Homeware.Office.Tables', 'listed', 3, ARRAY['admin', 'j0nny', 'james'], true, ARRAY[3, 5], ARRAY['admin', 'tim']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (9,	'Small Chair',	'Description',5.00,	1,   'Homeware.Office.Chairs', 'pending', 2, ARRAY['admin', 'j0nny']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (9,'Coffee', 'Description',4.99,	10,  'Drugs.Stimulants.Caffeine', 'pending', 2, ARRAY['admin', 'j0nny']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (9,'Muffin', 'Description',3.50,	10,  'Food.Baking', 'pending', 2, ARRAY['admin', 'j0nny']);
+INSERT INTO stock(uid, label, description, price, quantity, category, status, votes, voters) VALUES (9,	'99 Problems',	'I have too many problems; buy them off of me',5.00,	1,   'Truths.Existential', 'pending', 2, ARRAY['grod', 'nicky']);
 
 
 
@@ -274,12 +276,12 @@ INSERT INTO stock(uid, label, description, price, quantity, category, status) VA
 
 COPY users (uid, username, realname, password) FROM stdin;
 1	admin	Sally Smith	1337
-2	j0nny	John Diggle	password
-3	james	James Green	green
+2	tim	Tim bathgate	tim
+3	nicky	Nicky Van Hulst	nicky
 4	zoo	Monty Python	dinosaur
 5	qwerty	Zoe Curtis	purple
-6	Cambel	Thea Queen	something
-7	Waities	Kara Danvers	secure
+6	j0nnny	Thea Queen	something
+7	james	Kara Danvers	secure
 8	Cam	Camile Jones	12345
 9	grod	Cameron Smith	dfgh
 \.
@@ -305,4 +307,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
