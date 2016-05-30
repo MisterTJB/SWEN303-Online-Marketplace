@@ -23,7 +23,7 @@ function loadPastOrders(){
            for (product in data[order].products){
                $.get("/product/" + data[order].products[product] + "/raw", function(productData){
                    console.log(productData);
-                $("#" + data[order].tid).append("<a href='/product/" + data[order].products[product] + "'>" + productData.title + "</a>");
+                $("#" + data[order].tid).append("<li class='list-group-item'><a href='/product/" + data[order].products[product] + "'>" + productData.title + "</a></li>");
                });
            }
            $("#" + data[order].tid).append("<hr>");
